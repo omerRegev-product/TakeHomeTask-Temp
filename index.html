@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1440">
-  <title>Sensos — Ops Intelligence Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sensos — AI Services Platform (Case Study)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -11,376 +11,975 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════════════════════
-     SCREEN 0 — TITLE
-══════════════════════════════════════════════════════════ -->
-<div id="screen-title" class="screen active">
-  <div class="title-inner">
-    <svg class="logo-hero" viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Outer hexagon (isometric cube silhouette) -->
-      <path class="logo-path"
-        d="M30 3 L57 19 L57 51 L30 67 L3 51 L3 19 Z"
-        stroke="white" stroke-width="1.2" stroke-linejoin="round"/>
-      <!-- Top face -->
-      <path class="logo-path"
-        d="M30 3 L57 19 L30 35 L3 19 Z"
-        stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
-      <!-- Left face -->
-      <path class="logo-path"
-        d="M3 19 L3 51 L30 67 L30 35 Z"
-        stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
-      <!-- Right face -->
-      <path class="logo-path"
-        d="M57 19 L57 51 L30 67 L30 35 Z"
-        stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
-      <!-- Inner structural lines -->
-      <line class="logo-path" x1="30" y1="35" x2="30" y2="3"  stroke="white" stroke-width="0.7" stroke-opacity="0.3"/>
-      <line class="logo-path" x1="3"  y1="19" x2="57" y2="19" stroke="white" stroke-width="0.7" stroke-opacity="0.25"/>
+<div id="deck-stage">
+
+<!-- ══ TITLE ═════════════════════════════════════════════ -->
+<section class="deck-section" id="slide-title">
+  <div class="title-slide-inner">
+    <svg class="deck-logo" viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 3 L57 19 L57 51 L30 67 L3 51 L3 19 Z" stroke="#0A0A0B" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M30 3 L57 19 L30 35 L3 19 Z" stroke="#0A0A0B" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M3 19 L3 51 L30 67 L30 35 Z" stroke="#0A0A0B" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M57 19 L57 51 L30 67 L30 35 Z" stroke="#0A0A0B" stroke-width="1.5" stroke-linejoin="round"/>
+      <line x1="30" y1="35" x2="30" y2="3" stroke="#0A0A0B" stroke-width="0.7" stroke-opacity="0.3"/>
+      <line x1="3" y1="19" x2="57" y2="19" stroke="#0A0A0B" stroke-width="0.7" stroke-opacity="0.25"/>
     </svg>
     <div class="title-wordmark">SENSOS</div>
-    <div class="title-enter">Click anywhere to enter</div>
+    <div class="title-project">AI Services Platform — Case Study</div>
+    <div class="title-divider"></div>
+    <div class="title-presenter">Omer Regev</div>
+    <div class="title-role">PM for Cloud &amp; AI teams</div>
+    <div class="title-links">
+      <a class="title-link" href="https://www.linkedin.com/in/omer-regev/" target="_blank" rel="noopener">linkedin.com/in/omer-regev</a>
+      <span class="title-sep">·</span>
+      <a class="title-link" href="mailto:omereg@gmail.com">omereg@gmail.com</a>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- ══════════════════════════════════════════════════════════
-     SCREEN 1 — MAIN VIEW
-══════════════════════════════════════════════════════════ -->
-<div id="screen-main" class="screen">
-  <div class="layout">
-    <aside class="sidebar" data-sidebar="overview"></aside>
-    <div class="main">
-      <div class="briefing-bar" id="main-briefing"></div>
-      <div class="overview-split">
-        <div class="overview-left">
-          <div id="fleet-summary-strip" class="fleet-summary-strip"></div>
-          <!-- Tab switcher -->
-          <div class="overview-tabs" id="overview-tabs">
-            <button class="overview-tab-btn active" data-tab="live" onclick="setOverviewTab('live')">Live shipments</button>
-            <button class="overview-tab-btn" data-tab="status" onclick="setOverviewTab('status')">Lane status</button>
+<!-- ══ §0 DISCOVERY ══════════════════════════════════════ -->
+<section class="deck-section" id="slide-discovery">
+  <div class="slide-label anim">§0 — Discovery</div>
+  <h1 class="slide-heading anim">What we were working from.</h1>
+
+  <div class="discovery-layout">
+    <div class="discovery-nodes anim">
+      <div class="source-node" data-node="brief">
+        <div class="source-node-label">Customer Brief</div>
+        <div class="source-node-subtitle">Sensos product team</div>
+      </div>
+      <div class="source-node" data-node="telemetry">
+        <div class="source-node-label">Telemetry Spec</div>
+        <div class="source-node-subtitle">Smart label capabilities</div>
+      </div>
+      <div class="source-node" data-node="calibration">
+        <div class="source-node-label">Industry Calibration</div>
+        <div class="source-node-subtitle">Call with Daniel, Head of Ops<br>D2C Rx fulfillment (UK)</div>
+      </div>
+    </div>
+
+    <!-- Panel: Customer Brief -->
+    <div class="discovery-panel" id="panel-brief">
+      <div>
+        <div class="discovery-panel-title">Customer Brief</div>
+        <div class="discovery-quote">"Every week, two of our people spend about an hour a day each pulling temperature data off individual devices into Excel..."</div>
+        <div class="discovery-quote">"We only find out about a temperature problem when a patient complains — we're blind to everything that arrived warm and never got reported."</div>
+        <div class="discovery-quote">"That decision logic basically lives in his head."</div>
+      </div>
+      <div>
+        <div class="discovery-panel-title" style="margin-bottom:10px">Insights derived</div>
+        <ul class="arrow-list">
+          <li>Ops process is person-dependent, not system-dependent</li>
+          <li>Failure signal lags by days to weeks</li>
+          <li>No structured remediation loop</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Panel: Telemetry Spec -->
+    <div class="discovery-panel" id="panel-telemetry">
+      <div>
+        <div class="discovery-panel-title">Telemetry Spec</div>
+        <div class="discovery-quote">"Smart labels: temperature, GPS, tamper, shock. Continuous telemetry, not USB download."</div>
+        <div class="discovery-quote">"5% monitored sample today — 300 out of 6,000 shipments per day."</div>
+        <div class="discovery-quote">"Labels transmit in real time. Arrival events and delivery confirmations included."</div>
+      </div>
+      <div>
+        <div class="discovery-panel-title" style="margin-bottom:10px">Insights derived</div>
+        <ul class="arrow-list">
+          <li>Real-time data available — nobody is reading it systematically</li>
+          <li>Sample is representative: patterns on 5% apply across all 6,000</li>
+          <li>Sensor data is already there; the intelligence layer is what's missing</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Panel: Calibration -->
+    <div class="discovery-panel" id="panel-calibration">
+      <div>
+        <div class="discovery-panel-title">Industry Calibration — Daniel, Head of Ops (D2C Rx, UK)</div>
+        <div class="discovery-quote">"6,000 packages per day, direct to patients. About 1,000 employees."</div>
+        <div class="discovery-quote">"98% delivery success — that's the industry standard. We buy our way there."</div>
+        <div class="discovery-quote">"Ice is about 40% of our COP. We use 2 boxes because we don't know which routes need less."</div>
+      </div>
+      <div>
+        <div class="discovery-panel-title" style="margin-bottom:10px">Calibration inputs used</div>
+        <ul class="arrow-list">
+          <li>2% out-of-range rate (98% success = industry standard)</li>
+          <li>$500 avg package value (Daniel's range: £150-500, conservative)</li>
+          <li>$1 COP — ice is ~40% of this ($0.40/package)</li>
+          <li>6,000/day as realistic D2C pharma scale</li>
+        </ul>
+        <div class="discovery-key-insight" style="margin-top:16px">"98% success is BOUGHT, not engineered." Visibility would enable safe reduction — same performance, less spend.</div>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="discovery-empty">← Click a source to expand</div>
+  </div>
+</section>
+
+<!-- ══ §1 PROBLEM ════════════════════════════════════════ -->
+<section class="deck-section" id="slide-problem">
+  <div class="slide-label anim">§1 — The Problem</div>
+  <h1 class="slide-heading anim">Who's running this operation, and what's breaking for them.</h1>
+
+  <div class="problem-layout anim">
+    <!-- Left: persona cards -->
+    <div class="persona-list">
+      <div class="persona-card" data-persona="ops-lead">
+        <span class="badge badge-primary">Primary</span>
+        <div class="persona-card-name">Ops Lead</div>
+      </div>
+      <div class="persona-card" data-persona="ops-team">
+        <span class="badge badge-primary">Primary</span>
+        <div class="persona-card-name">Ops Team ×2</div>
+      </div>
+      <div class="persona-card" data-persona="warehouse">
+        <span class="badge badge-downstream">Downstream</span>
+        <div class="persona-card-name">Warehouse Team</div>
+      </div>
+      <div class="persona-card" data-persona="patient">
+        <span class="badge badge-enduser">End User</span>
+        <div class="persona-card-name">Patient</div>
+      </div>
+      <div class="persona-card" data-persona="compliance">
+        <span class="badge badge-inferred">Inferred</span>
+        <div class="persona-card-name">Compliance Officer</div>
+      </div>
+    </div>
+
+    <!-- Right: detail panels -->
+    <div style="flex:1;display:flex;flex-direction:column;gap:12px;min-height:0">
+
+      <div class="persona-detail-panel" id="detail-ops-lead">
+        <div class="jtbd-block">
+          <div class="jtbd-label">Job to be done</div>
+          <div class="jtbd-text">Get temperature-sensitive medications to the patient in spec, at scale, without living inside the process.</div>
+          <div class="subjob-row">
+            <span class="subjob-pill">Monitor</span>
+            <span class="subjob-pill">Detect</span>
+            <span class="subjob-pill">Attribute</span>
+            <span class="subjob-pill">Remediate</span>
+            <span class="subjob-pill">Optimize</span>
           </div>
-          <!-- Live shipments panel -->
-          <div id="overview-live" class="overview-panel">
-            <div id="main-approvals"></div>
-            <div id="overview-shipments"></div>
-          </div>
-          <!-- Lane status panel -->
-          <div id="overview-status" class="overview-panel" style="display:none"></div>
         </div>
-        <div class="overview-map-panel">
-          <div id="world-map-container"></div>
-          <!-- Map controls overlay — shown on Lane status tab only -->
-          <div id="map-controls" style="display:none"></div>
+        <ul class="cross-list">
+          <li>Blind to in-transit failures until a patient complains</li>
+          <li>Decision logic lives in his head — not documented, not transferable, not auditable</li>
+          <li>Remediates by emailing warehouses — no confirmation, no feedback loop</li>
+          <li>Patterns catch him too late (Friday review = week of damage already done)</li>
+          <li>Over-provisions because he can't see what's needed. Hits 98% by spending more, not by knowing more.</li>
+        </ul>
+      </div>
+
+      <div class="persona-detail-panel" id="detail-ops-team">
+        <div class="jtbd-block">
+          <div class="jtbd-label">Job to be done</div>
+          <div class="jtbd-text">Keep the ops lead informed and the operation moving.</div>
+          <div class="subjob-row">
+            <span class="subjob-pill">Data collection</span>
+            <span class="subjob-pill">Weekly reporting</span>
+            <span class="subjob-pill">Ad-hoc lookups</span>
+          </div>
+        </div>
+        <ul class="cross-list">
+          <li>1 hour/day each pulling USB logger data into Excel</li>
+          <li>Compile a weekly sheet for the ops lead's Friday review</li>
+          <li>Their entire value is manual data wrangling — no analysis, no action authority</li>
+          <li>At 15× scale: this process doesn't stretch. It breaks. 300 shipments/day from USB loggers is not physically possible.</li>
+        </ul>
+      </div>
+
+      <div class="persona-detail-panel" id="detail-warehouse">
+        <div class="jtbd-block">
+          <div class="jtbd-label">Job to be done</div>
+          <div class="jtbd-text">Pack and dispatch shipments correctly, respond to ops lead instructions.</div>
+          <div class="subjob-row">
+            <span class="subjob-pill">Packing</span>
+            <span class="subjob-pill">Ice config</span>
+            <span class="subjob-pill">Dispatch</span>
+          </div>
+        </div>
+        <ul class="cross-list">
+          <li>Receives instructions by email — no structured confirmation back</li>
+          <li>No visibility on whether changes actually worked</li>
+          <li>At scale: email chains break under volume of concurrent exceptions</li>
+        </ul>
+      </div>
+
+      <div class="persona-detail-panel" id="detail-patient">
+        <div class="jtbd-block">
+          <div class="jtbd-label">Job to be done</div>
+          <div class="jtbd-text">Receive medication in spec, on time, without having to think about logistics.</div>
+          <div class="subjob-row">
+            <span class="subjob-pill">Receive delivery</span>
+            <span class="subjob-pill">Confirm receipt</span>
+          </div>
+        </div>
+        <ul class="cross-list">
+          <li>Current failure signal: their complaint — after the product has already failed</li>
+          <li>No proactive notification when a delivery is at risk</li>
+          <li>On direct-ship lanes: a missed delivery means out-of-range product sitting in a warm van</li>
+        </ul>
+      </div>
+
+      <div class="persona-detail-panel" id="detail-compliance">
+        <div class="jtbd-block">
+          <div class="jtbd-label">Job to be done</div>
+          <div class="jtbd-text">Demonstrate regulatory adherence at scale.</div>
+          <div class="subjob-row">
+            <span class="subjob-pill">Audit readiness</span>
+            <span class="subjob-pill">Reporting</span>
+            <span class="subjob-pill">Incident documentation</span>
+          </div>
+        </div>
+        <ul class="cross-list">
+          <li>No structured audit trail for temperature excursions today</li>
+          <li>At scale: manual incident reporting becomes a liability</li>
+          <li>Compliance is a readiness play — becomes urgent when volumes grow or regulators audit</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-problems anim">
+    <div class="problem-card">
+      <div class="problem-card-title">Blindness</div>
+      <div class="problem-card-body">They only find out about a failure when a patient complains. Everything else is invisible.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-title">Over-provisioning trap</div>
+      <div class="problem-card-body">98% delivery success — bought, not engineered.</div>
+      <div class="problem-card-callout">Safe cost reduction is impossible without visibility.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ §2a COST ═══════════════════════════════════════════ -->
+<section class="deck-section" id="slide-cost">
+  <div class="slide-label anim">§2 — The Cost</div>
+  <h1 class="slide-heading anim">What blindness costs.</h1>
+
+  <div class="cost-layout">
+    <div class="cost-block anim">
+      <div>
+        <div class="cost-number">$22M</div>
+        <div class="cost-unit">/ year — product exposure</div>
+      </div>
+      <div>
+        <div class="cost-formula">6,000 packages/day × 365 × 2% out-of-range × $500/package</div>
+        <div class="cost-note">Product loss + reship. Before regulatory exposure. Before patient harm. The floor, not the ceiling.</div>
+      </div>
+    </div>
+
+    <div class="cost-block anim">
+      <div>
+        <div class="cost-number secondary">+$440K</div>
+        <div class="cost-unit">/ year — over-provisioning waste</div>
+      </div>
+      <div>
+        <div class="cost-formula">6,000 packages/day × 365 × $1 COP × 20% saving potential</div>
+        <div class="cost-note">Over-provisioning waste — already being spent. Recoverable once you can see what's actually needed.</div>
+      </div>
+    </div>
+
+    <div class="assumptions-table anim">
+      <div class="assumptions-label">Assumptions and sources</div>
+      <div class="assumption-row"><span class="assumption-key">6,000 packages/day</span><span class="assumption-val">Daniel (D2C Rx comparable)</span></div>
+      <div class="assumption-row"><span class="assumption-key">2% out-of-range rate</span><span class="assumption-val">Industry standard · Daniel confirmed</span></div>
+      <div class="assumption-row"><span class="assumption-key">$500 avg package value</span><span class="assumption-val">Daniel: £150-500 range, conservative midpoint</span></div>
+      <div class="assumption-row"><span class="assumption-key">$1 COP (ice = $0.40 = 40%)</span><span class="assumption-val">Daniel: £1-1.5, simplified</span></div>
+      <div class="assumption-row"><span class="assumption-key">20% ice saving potential</span><span class="assumption-val">2-box to 1-box on proven lanes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ §2b MATRIX ═════════════════════════════════════════ -->
+<section class="deck-section" id="slide-matrix">
+  <div class="slide-label anim">§2 — Impact / Effort</div>
+  <h1 class="slide-heading anim">Where to pull first.</h1>
+
+  <div class="matrix-layout">
+    <div class="matrix-container anim">
+      <svg id="impact-matrix" viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- Axes -->
+        <line x1="80" y1="20" x2="80" y2="360" stroke="#E8E6E0" stroke-width="1.5"/>
+        <line x1="80" y1="360" x2="640" y2="360" stroke="#E8E6E0" stroke-width="1.5"/>
+
+        <!-- Y axis label -->
+        <text x="18" y="195" font-size="10" fill="#888581" font-family="DM Mono, monospace"
+              transform="rotate(-90, 18, 195)" text-anchor="middle" letter-spacing="1">IMPACT</text>
+        <text x="46" y="28" font-size="9" fill="#B0ADA7" font-family="DM Mono, monospace" text-anchor="middle">HIGH</text>
+        <text x="46" y="358" font-size="9" fill="#B0ADA7" font-family="DM Mono, monospace" text-anchor="middle">LOW</text>
+
+        <!-- X axis label -->
+        <text x="360" y="390" font-size="10" fill="#888581" font-family="DM Mono, monospace"
+              text-anchor="middle" letter-spacing="1">EFFORT</text>
+        <text x="88" y="378" font-size="9" fill="#B0ADA7" font-family="DM Mono, monospace">HIGH</text>
+        <text x="610" y="378" font-size="9" fill="#B0ADA7" font-family="DM Mono, monospace">LOW</text>
+
+        <!-- Focus zone and dots drawn by JS -->
+      </svg>
+    </div>
+
+    <div class="matrix-footer anim">
+      <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted-2)">
+        Hover or click any dot for detail
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ §2c WHAT WE'RE SOLVING ════════════════════════════ -->
+<section class="deck-section" id="slide-solving">
+  <div class="slide-label anim">§2 — What We're Solving</div>
+  <h1 class="slide-heading anim">Four problems. Four agents.</h1>
+
+  <div class="solving-list anim">
+    <div class="solving-item">
+      <div class="solving-num">1</div>
+      <div>
+        <div class="solving-text">Detect</div>
+        <div class="solving-sub">Real-time, before the patient complaint. The foundation everything else depends on.</div>
+        <div class="solving-agent">→ Shipment Intelligence Agent</div>
+      </div>
+    </div>
+    <div class="solving-item">
+      <div class="solving-num">2</div>
+      <div>
+        <div class="solving-text">Prevent</div>
+        <div class="solving-sub">Intervene while the shipment is still moving. Proactive weather adjustments; reactive mid-transit handling.</div>
+        <div class="solving-agent">→ Prevention Agent</div>
+      </div>
+    </div>
+    <div class="solving-item">
+      <div class="solving-num">3</div>
+      <div>
+        <div class="solving-text">Attribute + Remediate</div>
+        <div class="solving-sub">Close the loop. Root cause, structured action, outcome check. Manual process breaks at scale.</div>
+        <div class="solving-agent">→ Resolution Agent</div>
+      </div>
+    </div>
+    <div class="solving-item">
+      <div class="solving-num">4</div>
+      <div>
+        <div class="solving-text">Optimise</div>
+        <div class="solving-sub">Right-provision once you can see what's needed. $440K/yr in over-provisioning, recoverable.</div>
+        <div class="solving-agent">→ Optimization Agent</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="solving-footer anim">
+    <button class="not-solving-toggle" id="not-solving-btn">What we're not solving →</button>
+  </div>
+
+  <!-- Overlay: what we're NOT solving -->
+  <div class="not-solving-overlay" id="not-solving-overlay">
+    <div class="not-solving-header">
+      <div class="not-solving-title">What we're not solving — and why</div>
+      <button class="not-solving-close" id="not-solving-close">✕ Close</button>
+    </div>
+    <div class="not-solving-items">
+      <div class="not-solving-item">
+        <div class="not-solving-label">Lane Optimization</div>
+        <div class="not-solving-reason">Low urgency. Client raised it last. Becomes available once the detection layer is in place and lane data is accumulating.</div>
+      </div>
+      <div class="not-solving-item">
+        <div class="not-solving-label">Monitor (labor)</div>
+        <div class="not-solving-reason">Solved by Sensos adoption itself, not by an agent. USB-logger data wrangling goes away when smart labels go everywhere.</div>
+      </div>
+      <div class="not-solving-item">
+        <div class="not-solving-label">Reporting</div>
+        <div class="not-solving-reason">A byproduct of the automation we're already building. Structured logs exist once the agents are running. No separate workstream needed.</div>
+      </div>
+      <div class="not-solving-item">
+        <div class="not-solving-label">High-Value Pareto</div>
+        <div class="not-solving-reason">Real problem. Different intervention type — requires human judgment, not agent automation. Out of scope for this build, not out of scope permanently.</div>
+      </div>
+      <div class="not-solving-item">
+        <div class="not-solving-label">Compliance automation</div>
+        <div class="not-solving-reason">High impact when it matters. A readiness play: critical when volumes grow or regulators audit. Requires regulatory approval to automate actions — not our constraint to solve today.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ §3.1 VISION ════════════════════════════════════════ -->
+<section class="deck-section" id="slide-vision">
+  <div class="slide-label anim">§3.1 — Vision</div>
+  <h1 class="slide-heading anim">What Sensos is becoming.</h1>
+
+  <div class="vision-statement anim">
+    An AI agent for autonomous ops, driven by real-time data. Extending the team, not just facilitating the work.
+  </div>
+
+  <div class="vision-transform anim">
+    <div class="vision-state">
+      <div class="vision-state-label">Today</div>
+      <div class="vision-state-title">Visibility platform</div>
+      <div class="vision-state-body">Data dashboards. The human reads and decides what to do. Everything is available. Nothing happens without someone acting on it.</div>
+    </div>
+    <div class="vision-arrow">→</div>
+    <div class="vision-state">
+      <div class="vision-state-label">Where this goes</div>
+      <div class="vision-state-title">AI services platform</div>
+      <div class="vision-state-body">Agents act. They report back what they handled. The ops team reviews, steers, and makes the judgment calls on the exceptions that matter.</div>
+    </div>
+  </div>
+
+  <div class="ceo-quote anim">
+    <div class="ceo-quote-text">"We don't hand the customer a dashboard. We hand them a resolution log. By the time they look up, it's already done."</div>
+    <div class="ceo-quote-attr">Aviv — CEO, Sensos</div>
+  </div>
+</section>
+
+<!-- ══ §3.2 PLATFORM ══════════════════════════════════════ -->
+<section class="deck-section" id="slide-platform">
+  <div class="slide-label anim">§3.2 — Platform</div>
+  <h1 class="slide-heading anim">We're not building an agent for one client. We're building the infrastructure.</h1>
+
+  <div class="platform-grid anim">
+    <div class="platform-col">
+      <div class="platform-col-label">Triggers</div>
+      <div class="platform-item">Telemetry / events (every label reading)</div>
+      <div class="platform-item">Scheduled (batch, daily, weekly cycles)</div>
+      <div class="platform-item">Manual invocation (any authenticated user)</div>
+      <div class="platform-expanded-items" id="triggers-expanded">
+        <div class="platform-item">Webhook / external event (carrier, WMS)</div>
+        <div class="platform-item">Rule threshold crossing (configurable)</div>
+      </div>
+      <button class="platform-expand-btn" data-target="triggers-expanded" data-more="+ 2 more" data-less="− show less">+ 2 more</button>
+    </div>
+    <div class="platform-col">
+      <div class="platform-col-label">Knowledge base</div>
+      <div class="platform-item">Shipment history (per-shipment records)</div>
+      <div class="platform-item">Lane performance data (patterns, baselines)</div>
+      <div class="platform-item">Rules engine (configurable per customer)</div>
+      <div class="platform-expanded-items" id="kb-expanded">
+        <div class="platform-item">Carrier SLAs + tracking history</div>
+        <div class="platform-item">Weather history + regional patterns</div>
+        <div class="platform-item">Product catalog (temp specs, value tiers)</div>
+        <div class="platform-item">Customer preferences + SLAs</div>
+      </div>
+      <button class="platform-expand-btn" data-target="kb-expanded" data-more="+ 4 more" data-less="− show less">+ 4 more</button>
+    </div>
+    <div class="platform-col">
+      <div class="platform-col-label">Tools</div>
+      <div class="platform-item">Threshold evaluator</div>
+      <div class="platform-item">Anomaly scorer</div>
+      <div class="platform-item">Cost calculator</div>
+      <div class="platform-expanded-items" id="tools-expanded">
+        <div class="platform-item">Carrier tracking API</div>
+        <div class="platform-item">Carrier instruction dispatch</div>
+        <div class="platform-item">Weather forecast API</div>
+        <div class="platform-item">Shipping matrix (read / write)</div>
+        <div class="platform-item">Customer notify (SMS + email)</div>
+        <div class="platform-item">Outcome checker (self-scheduled)</div>
+      </div>
+      <button class="platform-expand-btn" data-target="tools-expanded" data-more="+ 6 more" data-less="− show less">+ 6 more</button>
+    </div>
+  </div>
+
+  <div class="platform-key-line anim">
+    Client team or implementation team configures agents on top. New customer use case = new agent configuration, not new tools.
+  </div>
+
+  <div class="platform-focus-note anim">For this case study, four agents on this infrastructure. The platform supports any configuration — these four map to this customer's ranked problems.</div>
+  <div class="agent-mapping anim">
+    <div class="mapping-row">
+      <span class="mapping-problem">Detect</span>
+      <span class="mapping-arrow">→</span>
+      <span class="mapping-agent" style="color:var(--si)">Shipment Intelligence Agent</span>
+    </div>
+    <div class="mapping-row">
+      <span class="mapping-problem">Prevent</span>
+      <span class="mapping-arrow">→</span>
+      <span class="mapping-agent" style="color:var(--pa)">Prevention Agent</span>
+    </div>
+    <div class="mapping-row">
+      <span class="mapping-problem">Attribute + Remediate</span>
+      <span class="mapping-arrow">→</span>
+      <span class="mapping-agent" style="color:var(--ra)">Resolution Agent</span>
+    </div>
+    <div class="mapping-row">
+      <span class="mapping-problem">Optimise</span>
+      <span class="mapping-arrow">→</span>
+      <span class="mapping-agent" style="color:var(--oa)">Optimization Agent</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ §3.3 ARCHITECTURE ══════════════════════════════════ -->
+<section class="deck-section" id="slide-arch">
+  <div class="slide-label anim">§3.3 — Architecture</div>
+  <h1 class="slide-heading anim">How it's structured. Click any agent for detail.</h1>
+
+  <div class="arch-layout anim">
+    <div class="arch-diagram">
+
+      <!-- Trigger Layer -->
+      <div class="arch-layer">
+        <div class="arch-layer-label">Trigger Layer</div>
+        <div class="trigger-nodes">
+          <div class="trigger-node">
+            Telemetry / Events
+            <div class="trigger-node-sub">Continuous — fires on every label reading</div>
+          </div>
+          <div class="trigger-node">
+            Scheduled
+            <div class="trigger-node-sub">Weather scans, batch analysis cycles</div>
+          </div>
+          <div class="trigger-node">
+            Manual invocation
+            <div class="trigger-node-sub">Any authenticated user. Invocation authority is separate from approval authority.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connector">↓</div>
+
+      <!-- Agent Layer -->
+      <div class="arch-layer">
+        <div class="arch-layer-label">Agent Layer</div>
+        <div class="orchestrator-box">
+          <div class="orchestrator-name">Orchestrator</div>
+          <div class="orchestrator-sub">routes · logs · escalates</div>
+        </div>
+        <div class="agent-nodes">
+          <div class="agent-node" data-agent="si">
+            <div class="agent-dot" style="background:var(--si)">SI</div>
+            <div class="agent-node-name">Shipment Intelligence</div>
+            <div class="agent-node-click">click for spec →</div>
+          </div>
+          <div class="agent-node" data-agent="ra">
+            <div class="agent-dot" style="background:var(--ra)">RA</div>
+            <div class="agent-node-name">Resolution</div>
+            <div class="agent-node-click">click for spec →</div>
+          </div>
+          <div class="agent-node" data-agent="pa">
+            <div class="agent-dot" style="background:var(--pa)">PA</div>
+            <div class="agent-node-name">Prevention</div>
+            <div class="agent-node-click">click for spec →</div>
+          </div>
+          <div class="agent-node" data-agent="oa">
+            <div class="agent-dot" style="background:var(--oa)">OA</div>
+            <div class="agent-node-name">Optimization</div>
+            <div class="agent-node-click">click for spec →</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connector">↓</div>
+
+      <!-- Decision Layer -->
+      <div class="arch-layer">
+        <div class="arch-layer-label">Decision / Output Layer</div>
+        <div class="decision-tiers">
+          <div class="decision-tier">
+            <div class="tier-label">Small</div>
+            <div class="tier-name">Auto-execute</div>
+            <div style="font-size:11.5px;color:var(--muted);margin-top:5px">Routine, within guardrails, logged</div>
+          </div>
+          <div class="decision-tier">
+            <div class="tier-label">Medium</div>
+            <div class="tier-name">Ops Team Member</div>
+            <div style="font-size:11.5px;color:var(--muted);margin-top:5px">Certified for limited decisions</div>
+          </div>
+          <div class="decision-tier">
+            <div class="tier-label">Large</div>
+            <div class="tier-name">Ops Lead</div>
+            <div style="font-size:11.5px;color:var(--muted);margin-top:5px">High-stakes, novel, or high-cost</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agent spec card panel (populated by JS) -->
+    <div id="agent-spec-panel"></div>
+  </div>
+</section>
+
+<!-- ══ §3.4 HUMAN IN LOOP ══════════════════════════════ -->
+<section class="deck-section" id="slide-humanloop">
+  <div class="slide-label anim">§3.4 — Human-in-the-Loop</div>
+  <h1 class="slide-heading anim">How the human stays in control.</h1>
+
+  <div class="human-loop-layout">
+    <div class="loop-tier anim">
+      <div>
+        <div class="loop-tier-name">Pre-approved</div>
+        <div class="loop-tier-title">Auto-execute</div>
+        <div class="loop-tier-body">Routine decisions within guardrails. Agent acts, logs it, outcome monitored. No human needed unless the outcome check flags an issue.</div>
+      </div>
+      <div class="loop-tier-tag">Small decisions</div>
+    </div>
+
+    <div class="loop-tier anim">
+      <div>
+        <div class="loop-tier-name">Ops Team Member approval</div>
+        <div class="loop-tier-title">Team review</div>
+        <div class="loop-tier-body">Certified for limited decisions. Agent proposes and a team member approves in Slack or the UI. Ops lead not involved.</div>
+      </div>
+      <div class="loop-tier-tag">Medium decisions</div>
+    </div>
+
+    <div class="loop-tier anim">
+      <div>
+        <div class="loop-tier-name">Ops Lead approval</div>
+        <div class="loop-tier-title">Lead review</div>
+        <div class="loop-tier-body">High-stakes, novel, or high-cost. Agent proposes with: attribution, confidence, cost, alternatives. One action to approve. Not a workflow.</div>
+      </div>
+      <div class="loop-tier-tag">Large decisions</div>
+    </div>
+
+    <div class="loop-eval anim">
+      <strong>Evaluations monitor the pre-approved tier.</strong> The agent schedules outcome checks on its own actions. Human overrides are logged as signal and feed into retraining. Autonomy stays safe because performance is continuously measured.
+    </div>
+
+    <div class="loop-config-note anim">
+      <strong>Thresholds are configurable per customer.</strong> What counts as a "Small" auto-execute decision for one customer may be a "Large" (ops-lead approval) for another. Emailing a warehouse might auto-execute for a high-trust customer and require sign-off for a new one. The tier model is a policy — each customer tunes it.
+    </div>
+  </div>
+</section>
+
+<!-- ══ §3.5 SHOW / HIDE ═══════════════════════════════════ -->
+<section class="deck-section" id="slide-showhide">
+  <div class="slide-label anim">§3.5 — What We Show the User</div>
+  <h1 class="slide-heading anim">Final outputs and human interactions only. Everything else is expandable.</h1>
+
+  <div class="showhide-layout anim">
+    <div class="showhide-principle">
+      <strong>Principle:</strong> show what happened and what was done. Not every step, not every tool call. The ops lead reviews the outcome — not the methodology. The detail is always available; it's just not in their face.
+    </div>
+
+    <!-- Level 1 -->
+    <div class="log-level open" id="level-1">
+      <div class="log-level-header">
+        <div class="log-level-title">
+          <span class="log-level-num">Level 1</span>
+          <span class="log-level-label">Outcome (default)</span>
+        </div>
+        <span class="log-toggle">↓</span>
+      </div>
+      <div class="log-level-body">
+        <div class="log-l1">
+          <span class="log-l1-agent" style="color:var(--ra)">[RA]</span>
+          Resolution Agent · Miami–NYC · 14:32
+          <br>
+          Updated ice config to 2 boxes · next 5 shipments · warehouse notified.
+        </div>
+      </div>
+    </div>
+
+    <!-- Level 2 -->
+    <div class="log-level" id="level-2">
+      <div class="log-level-header">
+        <div class="log-level-title">
+          <span class="log-level-num">Level 2</span>
+          <span class="log-level-label">Tasks (expand)</span>
+        </div>
+        <span class="log-toggle">↓</span>
+      </div>
+      <div class="log-level-body">
+        <div class="log-l2">
+          <div class="log-l2-row"><span class="log-l2-check">✓</span><span>Carrier tracking: no delays or incidents</span></div>
+          <div class="log-l2-row"><span class="log-l2-check">✓</span><span>Weather: 31°C Miami, heat advisory active</span></div>
+          <div class="log-l2-row"><span class="log-l2-check">✓</span><span>Lane history: 1-box config set Nov 2024, never recalibrated for summer</span></div>
+          <div class="log-l2-row"><span class="log-l2-check">✓</span><span>Root cause: ice under-specified for ambient (87% confidence)</span></div>
+          <div class="log-l2-row"><span class="log-l2-check">✓</span><span>Action: 2 boxes for next 5 shipments</span></div>
+          <div class="log-l2-row"><span class="log-l2-check">✓</span><span>Shipping matrix updated · warehouse notified and confirmed 14:31</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Level 3 -->
+    <div class="log-level" id="level-3">
+      <div class="log-level-header">
+        <div class="log-level-title">
+          <span class="log-level-num">Level 3</span>
+          <span class="log-level-label">Reasoning trace (audit log)</span>
+        </div>
+        <span class="log-toggle">↓</span>
+      </div>
+      <div class="log-level-body">
+        <div class="log-l3">
+          <div class="log-l3-line"><span class="log-l3-time">14:30:01</span><span class="log-l3-event">Received: shipments #4398-4400 · temps 6.8 / 6.7 / 6.9°C</span></div>
+          <div class="log-l3-line"><span class="log-l3-time">14:30:03</span><span class="log-l3-action">→ carrier_tracking_api: no delays, no scan gaps → not carrier</span></div>
+          <div class="log-l3-line"><span class="log-l3-time">14:30:05</span><span class="log-l3-action">→ weather_forecast_api: 31°C Miami, heat advisory active</span></div>
+          <div class="log-l3-line"><span class="log-l3-time">14:30:08</span><span class="log-l3-action">→ shipment_data_store: OOR 0% Oct-Apr, 4.2% Jun-Aug</span></div>
+          <div class="log-l3-line"><span class="log-l3-time">         </span><span class="log-l3-event">&nbsp;&nbsp;ice config: 1 box since Nov 2024 (unchanged) → seasonal mismatch</span></div>
+          <div class="log-l3-line"><span class="log-l3-time">14:30:11</span><span class="log-l3-event">Confidence: 87% ice · 13% carrier · threshold for auto: 80%</span></div>
+          <div class="log-l3-line"><span class="log-l3-time">         </span><span class="log-l3-event">&nbsp;&nbsp;Tier: Small → auto-execute</span></div>
+          <div class="log-l3-line"><span class="log-l3-time">14:30:12</span><span class="log-l3-action">→ shipping_matrix (write): 1 box → 2 boxes · next 5</span></div>
+          <div class="log-l3-line"><span class="log-l3-time">14:30:14</span><span class="log-l3-action">→ carrier_instruction_dispatch: ACK 14:31:02</span></div>
         </div>
       </div>
     </div>
   </div>
-</div><!-- #screen-main -->
+</section>
 
-<!-- ══════════════════════════════════════════════════════════
-     SCREEN 2 — LANE DETAIL
-══════════════════════════════════════════════════════════ -->
-<div id="screen-lane" class="screen">
-  <div class="layout">
-    <aside class="sidebar" data-sidebar="lanes"></aside>
+<!-- ══ §3.6 EVALS ══════════════════════════════════════════ -->
+<section class="deck-section" id="slide-evals">
+  <div class="slide-label anim">§3.6 — Evals &amp; Learning</div>
+  <h1 class="slide-heading anim">Four feedback loops. How agents get better.</h1>
 
-    <!-- Lane main -->
-    <!-- Floating agent command bar -->
-    <div class="lane-command-bar" id="lane-command-bar">
-      <div class="lane-command-agents-label">
-        <span class="lcb-dot"></span>4 agents active
+  <div class="evals-layout">
+    <div class="eval-block anim">
+      <div>
+        <div class="eval-name">Implicit Reaction</div>
       </div>
-      <input class="lane-command-input" id="lane-command-input"
-             type="text" autocomplete="off" spellcheck="false"
-             placeholder="Ask the agents to act on this lane...">
-      <button class="lane-command-send" id="lane-command-send" aria-label="Send">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-          <path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
+      <div class="eval-body">Agent detects when a human reverses its decision. Holds as a weak signal. If the pattern repeats, it flags for review and adjusts behavior. No explicit feedback required.</div>
     </div>
-
-    <div class="lane-main">
-
-      <!-- Lane header -->
-      <div class="lane-header" id="lane-header-content">
-        <!-- Rendered by JS -->
+    <div class="eval-block anim">
+      <div>
+        <div class="eval-name">Explicit Directive</div>
       </div>
-
-      <!-- Lane metrics strip -->
-      <div class="lane-metrics-strip" id="lane-metrics-strip">
-        <!-- Rendered by JS -->
+      <div class="eval-body">Ops lead flags: "this action was wrong." High-confidence signal. Feeds directly into agent rules. One tap on any log entry to flag. Optional free-text to explain.</div>
+    </div>
+    <div class="eval-block anim">
+      <div>
+        <div class="eval-name">Outcome Eval</div>
       </div>
-
-      <!-- Stage pipeline -->
-      <div class="stage-pipeline-wrap">
-        <div class="pipeline-label">Shipment journey</div>
-        <div class="stage-pipeline" id="stage-pipeline">
-          <!-- Rendered by JS -->
-        </div>
-        <!-- Shipment expansion (Middle Mile) -->
-        <div class="stage-shipments" id="stage-shipments-wrap">
-          <div id="stage-shipments-inner"></div>
-        </div>
+      <div class="eval-body">Did the action actually move the metric? Resolution Agent: did OOR rate drop on the next N shipments? Prevention: failure rate with vs. without intervention? The agent schedules its own follow-up check — appears in the activity log days later.</div>
+    </div>
+    <div class="eval-block moat anim">
+      <div>
+        <div class="eval-name">Cross-Entity Learning</div>
+        <span class="eval-moat-tag">← the moat</span>
       </div>
+      <div class="eval-body moat-body">What worked on Lane A becomes a recommendation for Lane B. Pattern on one product informs another with the same temp profile. Across Sensos customers: aggregate rules, not raw data — defensible for pharma. No individual customer accumulates this breadth of signal. Sensos does.</div>
+    </div>
+  </div>
+</section>
 
-      <!-- Tabs -->
-      <div class="tabs-bar">
-        <button class="tab-btn" data-tab="history">History</button>
-        <button class="tab-btn active" data-tab="live">
-          Live <span class="tab-live-dot"></span>
-        </button>
-        <button class="tab-btn" data-tab="outlook">Outlook</button>
+<!-- ══ §4.1 MENTAL MODEL ══════════════════════════════════ -->
+<section class="deck-section" id="slide-mental">
+  <div class="slide-label anim">§4 — UI/UX: Dashboards Are the Devil, Life Is a Game</div>
+  <h1 class="slide-heading anim">The mental model first.</h1>
+
+  <div class="game-metaphor anim">
+    <div class="game-meta-label">The frame for what follows</div>
+    <div class="game-meta-body">Think of running the operation like a strategy game. The ops user is optimising their routes, their lanes, their outcomes. The agents handle the ground-level moves so the user can focus on the decisions that matter. They're on the same side.</div>
+  </div>
+
+  <div class="mental-model-cards anim">
+    <div class="mental-card">
+      <div class="mental-card-label">Entity</div>
+      <div class="mental-card-title">Products</div>
+      <div class="mental-card-body">What's being shipped. Temperature spec. Value tier. The rules that govern cold-chain behaviour.</div>
+    </div>
+    <div class="mental-card">
+      <div class="mental-card-label">Entity</div>
+      <div class="mental-card-title">Shipments</div>
+      <div class="mental-card-body">A product on a lane, in motion. Telemetry streaming. In range or not. An instance of something that's happened once.</div>
+    </div>
+    <div class="mental-card">
+      <div class="mental-card-label">Primary axis</div>
+      <div class="mental-card-title">Lanes</div>
+      <div class="mental-card-body">The route. Where decisions live and accumulate. When an agent fixes something, the fix almost always applies to the lane — not just one shipment.</div>
+    </div>
+  </div>
+
+  <div class="mental-data-layer anim">
+    <span class="mental-data-icon">↑</span>
+    <div>
+      <strong>Sensos smart labels</strong> provide continuous telemetry on every entity in motion — temperature, GPS, tamper, shock. This is the data layer that feeds all three.
+      <span class="mental-partial-note">Simplified model — not the full entity schema.</span>
+    </div>
+  </div>
+
+  <div class="mental-joint-principle anim">
+    The operation is managed by humans and AI agents — together.
+    <div class="mental-joint-body">Both are participants. Neither is just watching. The surface treats them as peers in the same team, not as "the tool" and "the operator."</div>
+  </div>
+</section>
+
+<!-- ══ §4.2 DESIGN INTENT ════════════════════════════════ -->
+<section class="deck-section" id="slide-intent">
+  <div class="slide-label anim">§4.2 — Design Intent</div>
+  <h1 class="slide-heading anim">Three things the tool does for the ops user.</h1>
+
+  <div class="intent-layout">
+    <div class="intent-block anim">
+      <div class="intent-num">(1)</div>
+      <div>
+        <div class="intent-title">Acts automatically</div>
+        <div class="intent-body">Automations and AI handle the routine. The ops user doesn't see this unless they want to. The activity log is the receipt.</div>
       </div>
-
-      <!-- Tab body -->
-      <div id="tab-live" style="flex:1;min-height:0;overflow:hidden;display:flex">
-        <div class="activity-feed-wrap">
-          <div id="activity-feed">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-        <aside class="config-panel">
-          <div id="config-panel-content">
-            <!-- Rendered by JS -->
-          </div>
-        </aside>
+    </div>
+    <div class="intent-block anim">
+      <div class="intent-num">(2)</div>
+      <div>
+        <div class="intent-title">Surfaces what matters</div>
+        <div class="intent-body">Questions. Problems. Approvals. The agent comes to the user — not the other way around. Nothing important requires going looking.</div>
       </div>
-
-      <!-- History tab -->
-      <div id="tab-history" class="history-content" style="display:none;flex:1;overflow-y:auto">
-        <div class="history-chart-title">Out-of-range rate (%) — last 6 months</div>
-        <div class="mini-chart">
-          <div class="chart-bar" style="height:8%"  data-val="0.1%"></div>
-          <div class="chart-bar" style="height:14%" data-val="0.2%"></div>
-          <div class="chart-bar" style="height:0%"  data-val="0.0%"></div>
-          <div class="chart-bar warn" style="height:100%" data-val="4.2%"></div>
-          <div class="chart-bar" style="height:12%" data-val="0.1%"></div>
-          <div class="chart-bar" style="height:0%"  data-val="0.0%"></div>
-        </div>
-        <div class="chart-months">
-          <span class="chart-month">Jan</span>
-          <span class="chart-month">Feb</span>
-          <span class="chart-month">Mar</span>
-          <span class="chart-month">Jun</span>
-          <span class="chart-month">Jul</span>
-          <span class="chart-month">Aug</span>
-        </div>
-        <div style="margin-top:20px;font-size:12px;color:var(--muted);line-height:1.7">
-          Jun spike caused by seasonal ice config mismatch. Resolution Agent corrected config on 14 Jun.
-          Subsequent months returned to baseline.
-        </div>
-      </div>
-
-      <!-- Outlook tab -->
-      <div id="tab-outlook" class="outlook-content" style="display:none;flex:1;overflow-y:auto">
-        <div class="outlook-item">
-          <span class="outlook-icon">⚠</span>
-          <div class="outlook-text">
-            <strong>Heat advisory — Tue–Wed</strong>
-            <span>Ambient temps forecast above 30°C in Miami. Prevention Agent monitoring 8 upcoming shipments. No action required yet.</span>
-          </div>
-        </div>
-        <div class="outlook-item">
-          <span class="outlook-icon">📦</span>
-          <div class="outlook-text">
-            <strong>14 shipments dispatching tomorrow</strong>
-            <span>Scheduled 06:00–10:00. 2 flagged for overnight uplift by Prevention Agent (pending weather confirmation).</span>
-          </div>
-        </div>
-        <div class="outlook-item">
-          <span class="outlook-icon">💡</span>
-          <div class="outlook-text">
-            <strong>Optimization recommendation pending</strong>
-            <span>Reduce ice to 1 box on overnight shipments Nov–Feb. Projected saving $18K/yr. Awaiting your approval.</span>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- .lane-main -->
-  </div><!-- .layout -->
-</div><!-- #screen-lane -->
-
-<!-- ══════════════════════════════════════════════════════════
-     SCREEN 3 — AGENTS
-══════════════════════════════════════════════════════════ -->
-<div id="screen-agents" class="screen">
-  <div class="layout">
-    <aside class="sidebar" data-sidebar="agents"></aside>
-    <div class="agents-main">
-      <div class="agents-header">
-        <div class="agents-title">Agents</div>
-        <div class="agents-subtitle">4 agents active · All systems operational</div>
-      </div>
-      <div class="agents-body">
-        <div class="agents-constellation" id="agents-constellation">
-          <!-- Rendered by JS -->
-        </div>
-        <div class="agent-detail-panel" id="agent-detail-panel">
-          <!-- Rendered by JS -->
-        </div>
+    </div>
+    <div class="intent-block anim">
+      <div class="intent-num">(3)</div>
+      <div>
+        <div class="intent-title">Lets the user drive</div>
+        <div class="intent-body">React to what agents surface. Or be proactive — invoke an agent, change a rule, adjust a threshold, steer the operation.</div>
       </div>
     </div>
   </div>
-</div><!-- #screen-agents -->
+</section>
 
-<!-- ══════════════════════════════════════════════════════════
-     SCREEN 4 — PRODUCTS LIST
-══════════════════════════════════════════════════════════ -->
-<div id="screen-products" class="screen">
-  <div class="layout">
-    <aside class="sidebar" data-sidebar="products"></aside>
-    <div class="products-main">
-      <div class="briefing-bar" style="justify-content:flex-start;gap:16px">
-        <div class="briefing-text"><strong>3 products</strong> · 2 chilled · 1 ambient · 1 optimization pending approval</div>
-        <div class="briefing-status"><span class="briefing-dot"></span>All in spec</div>
+<!-- ══ §4.3 DEMO ═══════════════════════════════════════════ -->
+<section class="deck-section" id="slide-demo">
+  <div class="slide-label anim">§4.3 — Demo</div>
+  <h1 class="slide-heading anim">Let's see it.</h1>
+
+  <div class="demo-layout">
+    <div class="demo-wireframe-note anim">
+      <strong>What this is:</strong> a wireframe, not a finished build. Not everything is wired. The point is to show the vision of how the ops team experiences the platform with the agents — not a production UI.
+    </div>
+
+    <a class="demo-open-btn anim" href="../demo/index.html" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M6 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-3M9 2h5m0 0v5m0-5L7 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Open interactive demo
+    </a>
+
+    <div class="demo-watch-list anim">
+      <div class="demo-watch-item">
+        <span class="demo-watch-num">1</span>
+        <span>Main view — quiet state (nothing needs you) vs. active state (one exception pending). The difference between a calm morning and a decision required.</span>
       </div>
-      <div class="content-scroll">
-        <div class="section-label">Products</div>
-        <div class="lane-list" id="products-lane-list">
-          <!-- Rendered by JS -->
-        </div>
+      <div class="demo-watch-item">
+        <span class="demo-watch-num">2</span>
+        <span>Activity feed — how the agent reports vs. how it asks. Resolved items vs. the open escalation card.</span>
+      </div>
+      <div class="demo-watch-item">
+        <span class="demo-watch-num">3</span>
+        <span>Expansion — one click to verify (Level 2 tasks), two clicks to audit (Level 3 reasoning trace). The principle in practice, not in description.</span>
       </div>
     </div>
   </div>
-</div><!-- #screen-products -->
+</section>
 
-<!-- ══════════════════════════════════════════════════════════
-     SCREEN 5 — MANAGE LANES
-══════════════════════════════════════════════════════════ -->
-<div id="screen-lanes" class="screen">
-  <div class="layout">
-    <aside class="sidebar" data-sidebar="lanes"></aside>
-    <div class="products-main">
-      <div class="briefing-bar" id="lanes-briefing" style="justify-content:flex-start;gap:16px">
-        <!-- Rendered by JS -->
-      </div>
-      <div class="content-scroll">
-        <div class="section-label-row">
-          <div class="section-label" style="padding-top:0">Manage lanes</div>
-          <button class="lanes-add-btn" onclick="showToast('Adding lanes is disabled in this demo')">+ Add lane</button>
-        </div>
-        <div class="lane-list" id="lanes-list">
-          <!-- Rendered by JS -->
+<!-- ══ §5 RECAP ════════════════════════════════════════════ -->
+<section class="deck-section" id="slide-recap">
+  <div class="slide-label anim">§5 — Recap</div>
+  <h1 class="slide-heading anim">What we set out to answer.</h1>
+
+  <div class="recap-layout">
+    <div class="check-list anim">
+      <div class="check-item">
+        <div class="check-mark">✓</div>
+        <div class="check-content">
+          <div class="check-q">Do you expose the agent's reasoning, or just the outcome?</div>
+          <div class="check-a">Outcome by default. Reasoning on demand. Three zoom levels.</div>
+          <div class="check-ref">§3.5</div>
         </div>
       </div>
-    </div>
-  </div>
-</div><!-- #screen-lanes -->
-
-<!-- ══════════════════════════════════════════════════════════
-     SCREEN 6 — PRODUCT DETAIL
-══════════════════════════════════════════════════════════ -->
-<div id="screen-product" class="screen">
-  <div class="layout">
-    <aside class="sidebar" data-sidebar="products"></aside>
-    <div class="lane-main">
-      <div class="lane-header" id="product-header-content"><!-- Rendered by JS --></div>
-      <div id="tab-product-live" style="flex:1;min-height:0;overflow:hidden;display:flex">
-        <div class="activity-feed-wrap" id="product-feed"><!-- Rendered by JS --></div>
-        <aside class="config-panel" id="product-config-panel"><!-- Rendered by JS --></aside>
-      </div>
-    </div>
-  </div>
-</div><!-- #screen-product -->
-
-<!-- ══════════════════════════════════════════════════════════
-     SCREEN 7 — SHIPMENTS LIST
-══════════════════════════════════════════════════════════ -->
-<div id="screen-shipments" class="screen">
-  <div class="layout">
-    <aside class="sidebar" data-sidebar="shipments"></aside>
-    <div class="products-main">
-      <div class="briefing-bar" id="shipments-briefing" style="justify-content:flex-start;gap:16px">
-        <!-- Rendered by JS -->
-      </div>
-      <div class="content-scroll">
-        <div class="section-label-row">
-          <div class="section-label" style="padding-top:0">Shipments</div>
-          <div class="shipments-filter" id="shipments-filter">
-            <button class="ship-filter-btn active" data-f="all" onclick="setShipmentFilter('all')">All</button>
-            <button class="ship-filter-btn" data-f="live" onclick="setShipmentFilter('live')">Live</button>
-            <button class="ship-filter-btn" data-f="delivered" onclick="setShipmentFilter('delivered')">Delivered</button>
-          </div>
+      <div class="check-item">
+        <div class="check-mark">✓</div>
+        <div class="check-content">
+          <div class="check-q">Do you show every action or only the ones that need a human?</div>
+          <div class="check-a">Pre-approval for routine. Escalation by type for the rest.</div>
+          <div class="check-ref">§3.4</div>
         </div>
-        <div class="lane-list" id="shipments-list">
-          <!-- Rendered by JS -->
+      </div>
+      <div class="check-item">
+        <div class="check-mark">✓</div>
+        <div class="check-content">
+          <div class="check-q">Is each service its own page, one surface, or something else?</div>
+          <div class="check-a">One surface. Organized by Lane, not by service.</div>
+          <div class="check-ref">§4</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-mark">✓</div>
+        <div class="check-content">
+          <div class="check-q">How does the surface avoid being a dashboard?</div>
+          <div class="check-a">It speaks first. Agent as author. Ops lead as editor.</div>
+          <div class="check-ref">§4</div>
         </div>
       </div>
     </div>
-  </div>
-</div><!-- #screen-shipments -->
 
-<!-- ══════════════════════════════════════════════════════════
-     SCREEN 8 — SHIPMENT DETAIL
-══════════════════════════════════════════════════════════ -->
-<div id="screen-shipment" class="screen">
-  <div class="layout">
-    <aside class="sidebar" data-sidebar="shipments"></aside>
-
-    <!-- Floating agent command bar -->
-    <div class="lane-command-bar" id="shipment-command-bar">
-      <div class="lane-command-agents-label">
-        <span class="lcb-dot"></span>4 agents active
+    <div class="expansion-path anim">
+      <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-2);margin-bottom:10px">Where this goes</div>
+      <div class="expansion-row">
+        <span class="expansion-highlight">More coverage</span>
+        <span class="expansion-arrow">→</span>
+        <span>Richer sample</span>
+        <span class="expansion-arrow">→</span>
+        <span class="expansion-highlight">Sharper patterns</span>
       </div>
-      <input class="lane-command-input" id="shipment-command-input"
-             type="text" autocomplete="off" spellcheck="false"
-             placeholder="Ask the agents about this shipment...">
-      <button class="lane-command-send" id="shipment-command-send" aria-label="Send">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-          <path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
+      <div class="expansion-row">
+        <span class="expansion-highlight">Better patterns</span>
+        <span class="expansion-arrow">→</span>
+        <span>Better recommendations</span>
+        <span class="expansion-arrow">→</span>
+        <span class="expansion-highlight">Less manual overhead</span>
+      </div>
+      <div class="expansion-row">
+        <span class="expansion-highlight">Cross-customer</span>
+        <span class="expansion-arrow">→</span>
+        <span>Network learning</span>
+        <span class="expansion-arrow">→</span>
+        <span class="expansion-highlight">Moat compounds over time</span>
+      </div>
+      <div class="expansion-row">
+        <span class="expansion-highlight">Approved decisions</span>
+        <span class="expansion-arrow">→</span>
+        <span>Become rules</span>
+        <span class="expansion-arrow">→</span>
+        <span class="expansion-highlight">Autonomy expands safely</span>
+      </div>
     </div>
-
-    <div class="lane-main">
-      <!-- Shipment header -->
-      <div class="lane-header" id="shipment-header-content">
-        <!-- Rendered by JS -->
-      </div>
-
-      <!-- Journey pipeline -->
-      <div class="stage-pipeline-wrap">
-        <div class="pipeline-label">Shipment journey</div>
-        <div class="stage-pipeline" id="shipment-pipeline">
-          <!-- Rendered by JS -->
-        </div>
-      </div>
-
-      <!-- Timeline -->
-      <div class="shipment-timeline-wrap">
-        <div class="section-label" style="padding:16px 24px 8px">Activity</div>
-        <div class="updates-feed" id="shipment-timeline">
-          <!-- Rendered by JS -->
-        </div>
-      </div>
-    </div><!-- .lane-main -->
-  </div><!-- .layout -->
-</div><!-- #screen-shipment -->
-
-<!-- ══════════════════════════════════════════════════════════
-     AGENT POPUP CONTAINER (fixed, all screens)
-══════════════════════════════════════════════════════════ -->
-<div id="popup-container"></div>
-
-<!-- ══════════════════════════════════════════════════════════
-     DEMO CONTROLS (presentation only)
-══════════════════════════════════════════════════════════ -->
-<div id="demo-controls">
-  <span class="demo-label">Scenario</span>
-  <div class="demo-toggle">
-    <button class="demo-toggle-btn active" data-mode="quiet">Quiet</button>
-    <button class="demo-toggle-btn" data-mode="active">Exception</button>
   </div>
-  <button class="demo-sim-btn" id="demo-sim-btn">Simulate agent →</button>
-  <button class="demo-restart-btn" id="demo-restart-btn">↺ Restart</button>
-</div>
+</section>
 
-<!-- Toast container -->
-<div id="demo-toast-container"></div>
+<!-- ══ THANK YOU ════════════════════════════════════════════ -->
+<section class="deck-section" id="slide-thanks">
+  <div class="title-slide-inner">
+    <svg class="deck-logo" viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 3 L57 19 L57 51 L30 67 L3 51 L3 19 Z" stroke="#0A0A0B" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M30 3 L57 19 L30 35 L3 19 Z" stroke="#0A0A0B" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M3 19 L3 51 L30 67 L30 35 Z" stroke="#0A0A0B" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M57 19 L57 51 L30 67 L30 35 Z" stroke="#0A0A0B" stroke-width="1.5" stroke-linejoin="round"/>
+      <line x1="30" y1="35" x2="30" y2="3" stroke="#0A0A0B" stroke-width="0.7" stroke-opacity="0.3"/>
+      <line x1="3" y1="19" x2="57" y2="19" stroke="#0A0A0B" stroke-width="0.7" stroke-opacity="0.25"/>
+    </svg>
+    <div class="title-wordmark">SENSOS</div>
+    <div class="title-divider"></div>
+    <div class="title-presenter">Thank you.</div>
+    <div class="title-role" style="font-size:16px;font-weight:600;color:var(--ink);font-family:var(--font-ui);margin-bottom:16px">Omer Regev</div>
+    <div class="title-links">
+      <a class="title-link" href="https://www.linkedin.com/in/omer-regev/" target="_blank" rel="noopener">linkedin.com/in/omer-regev</a>
+      <span class="title-sep">·</span>
+      <a class="title-link" href="mailto:omereg@gmail.com">omereg@gmail.com</a>
+    </div>
+  </div>
+</section>
 
-<!-- Scripts -->
+<!-- ══ SPEAKER NOTES (hidden) ════════════════════════════ -->
+<section class="deck-section" id="slide-speaker" style="display:none">
+</section>
+
+</div><!-- /#deck-stage -->
+
+<!-- ── Tooltip (outside stage so fixed positioning works) ─── -->
+<div id="matrix-tooltip"></div>
+
+<!-- ── Navigation bar ───────────────────────────────────── -->
+<nav id="deck-nav">
+  <button class="nav-btn" id="btn-prev">← Prev</button>
+  <div id="progress-dots"></div>
+  <span id="slide-counter">1 / 17</span>
+  <button class="nav-btn" id="btn-next">Next →</button>
+</nav>
+
+<!-- ── Speaker panel ────────────────────────────────────── -->
+<div id="speaker-panel"></div>
+<div id="speaker-hint">S — speaker notes</div>
+
 <script src="data.js"></script>
-<script src="map-data.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -1,575 +1,318 @@
-// data.js — Hardcoded demo content for the Sensos clickable wireframe
-// All content is illustrative. Values sourced from the case study working files.
+// data.js — all hardcoded content for the Sensos case-study deck
 
-const AGENTS = {
-  SI: {
-    id: 'SI', name: 'Shipment Intelligence', color: '#5B6470', bg: 'rgba(91,100,112,0.12)',
-    role: 'Monitors all active shipments. Classifies and routes exceptions to the right agent.',
-    stat: '47 scanned today', tier: 'Fully autonomous',
-    evals: ['Implicit Reaction', 'Automated'], handoffsTo: ['RA', 'PA'],
-    glyph: 'eye',
-    stats: [{ label: 'Uptime', value: '99.2%' }, { label: 'Missed events', value: '0' }],
-    triggers: ['New shipment scan', 'Sensor alert', 'Schedule update'],
-    outputs: ['Exception classification', 'Agent routing', 'Scan log'],
+const SOURCE_NODES = [
+  {
+    id: 'brief',
+    label: 'Customer Brief',
+    title: 'CUSTOMER BRIEF',
+    quotes: [
+      '"Every week, two of our people spend about an hour a day each pulling temperature data off individual devices into Excel..."',
+      '"We only find out about a temperature problem when a patient complains — we\'re blind to everything that arrived warm and never got reported."',
+      '"That decision logic basically lives in his head."'
+    ],
+    insights: [
+      'Ops process is person-dependent, not system-dependent',
+      'Failure signal lags by days to weeks',
+      'No structured remediation loop'
+    ]
   },
-  RA: {
-    id: 'RA', name: 'Resolution', color: '#A8543A', bg: 'rgba(168,84,58,0.12)',
-    role: 'Attributes root cause. Selects and executes remediation. Logs outcome for learning.',
-    stat: '3 resolved this week', tier: 'Small: auto · Large: approval',
-    evals: ['Implicit Reaction', 'Explicit Directive', 'Outcome Eval'], handoffsTo: [],
-    glyph: 'shield',
-    stats: [{ label: 'Avg resolution time', value: '4.2 min' }, { label: 'Auto-resolved', value: '11 / 14' }],
-    triggers: ['Exception from SI', 'Escalation flag'],
-    outputs: ['Root cause', 'Remediation action', 'Outcome log'],
+  {
+    id: 'telemetry',
+    label: 'Telemetry Spec',
+    title: 'TELEMETRY SPEC',
+    quotes: [
+      '"Smart labels: temperature, GPS, tamper, shock. Continuous telemetry, not USB download."',
+      '"5% monitored sample today — 300 out of 6,000 shipments per day."',
+      '"Labels transmit in real time. Arrival events and delivery confirmations included."'
+    ],
+    insights: [
+      'Real-time data available — nobody is reading it systematically',
+      'Sample is representative: patterns on 5% apply across all 6,000',
+      'Sensor data is already there; the intelligence layer is what\'s missing'
+    ]
   },
-  PA: {
-    id: 'PA', name: 'Prevention', color: '#3A5BA8', bg: 'rgba(58,91,168,0.12)',
-    role: 'Pre-empts failures using weather forecasts and schedule data. Adjusts shipments proactively.',
-    stat: '8 watching · 0 failures', tier: 'Small: auto · Large: approval',
-    evals: ['Implicit Reaction', 'Outcome Eval'], handoffsTo: [],
-    glyph: 'bolt',
-    stats: [{ label: 'Active monitors', value: '8' }, { label: 'Failures prevented', value: '3 this month' }],
-    triggers: ['Weather forecast update', 'Schedule change', 'Risk signal from SI'],
-    outputs: ['Pre-emptive adjustment', 'Risk flag', 'Shipment reroute'],
+  {
+    id: 'calibration',
+    label: 'Industry Calibration',
+    subtitle: 'Call with Daniel, Head of Ops, D2C Rx fulfillment (UK)',
+    title: 'INDUSTRY CALIBRATION',
+    quotes: [
+      '"6,000 packages per day, direct to patients. About 1,000 employees."',
+      '"98% delivery success — that\'s the industry standard. We buy our way there."',
+      '"Ice is about 40% of our COP. We use 2 boxes because we don\'t know which routes need less."'
+    ],
+    insights: [
+      '2% out-of-range rate (98% success is the industry standard)',
+      '$500 avg package value (Daniel\'s range: £150-500, conservative midpoint)',
+      '$1 COP — ice is ~40% of this ($0.40/package)',
+      '6,000/day as realistic D2C pharma scale'
+    ],
+    keyInsight: '"98% success is BOUGHT, not engineered." Visibility would enable safe reduction — same performance, less spend.'
+  }
+];
+
+const PERSONAS = [
+  {
+    id: 'ops-lead',
+    label: 'Ops Lead',
+    badge: 'PRIMARY',
+    jtbd: 'Get temperature-sensitive medications to the patient in spec, at scale, without living inside the process.',
+    subjobs: ['Monitor', 'Detect', 'Attribute', 'Remediate', 'Optimize'],
+    pains: [
+      'Blind to in-transit failures until a patient complains',
+      'Decision logic lives in his head — not documented, not transferable, not auditable',
+      'Remediates by emailing warehouses — no confirmation, no feedback loop',
+      'Patterns catch him too late (Friday review = week of damage already done)',
+      'Over-provisions because he can\'t see what\'s needed. Hits 98% by spending more, not by knowing more.'
+    ]
   },
-  OA: {
-    id: 'OA', name: 'Optimization', color: '#2F7D5B', bg: 'rgba(47,125,91,0.12)',
-    role: 'Finds safe cost reductions without compromising performance. Requires approval before acting.',
-    stat: '$18K saving pending approval', tier: 'Always requires approval',
-    evals: ['Explicit Directive', 'Cross-Entity'], handoffsTo: [],
-    glyph: 'leaf',
-    stats: [{ label: 'Savings identified', value: '$18K / yr' }, { label: 'Optimizations applied', value: '4' }],
-    triggers: ['Weekly schedule review', 'New product added', 'Performance baseline met'],
-    outputs: ['Cost recommendation', 'Approval request', 'Applied optimization'],
+  {
+    id: 'ops-team',
+    label: 'Ops Team ×2',
+    badge: 'PRIMARY',
+    jtbd: 'Keep the ops lead informed and the operation moving.',
+    subjobs: ['Data collection', 'Weekly reporting', 'Ad-hoc lookups'],
+    pains: [
+      '1 hour/day each pulling USB logger data into Excel',
+      'Compile a weekly sheet for the ops lead\'s Friday review',
+      'Their entire value is manual data wrangling — no analysis, no action authority',
+      'At 15× scale: this process doesn\'t stretch. It breaks. 300 shipments/day from USB loggers is not physically possible.'
+    ]
   },
-  YOU: {
-    id: 'YOU', name: 'Ops Lead', color: '#0A0A0B', bg: 'rgba(10,10,11,0.08)',
-    role: 'Human decision-maker. Reviews escalations, approves large changes, sets direction.',
-    stat: '', tier: '', evals: [], handoffsTo: [],
-    glyph: 'person', stats: [], triggers: [], outputs: [],
+  {
+    id: 'warehouse',
+    label: 'Warehouse Team',
+    badge: 'DOWNSTREAM',
+    jtbd: 'Pack and dispatch shipments correctly, respond to ops lead instructions.',
+    subjobs: ['Packing', 'Ice config', 'Dispatch'],
+    pains: [
+      'Receives instructions by email — no structured confirmation back',
+      'No visibility on whether changes actually worked',
+      'At scale: email chains break under volume of concurrent exceptions'
+    ]
   },
+  {
+    id: 'patient',
+    label: 'Patient',
+    badge: 'END USER',
+    jtbd: 'Receive medication in spec, on time, without having to think about logistics.',
+    subjobs: ['Receive delivery', 'Confirm receipt'],
+    pains: [
+      'Current failure signal: their complaint — after the product has already failed',
+      'No proactive notification when a delivery is at risk',
+      'On direct-ship lanes: a missed delivery means out-of-range product sitting in a warm van'
+    ]
+  },
+  {
+    id: 'compliance',
+    label: 'Compliance Officer',
+    badge: 'INFERRED',
+    jtbd: 'Demonstrate regulatory adherence at scale.',
+    subjobs: ['Audit readiness', 'Reporting', 'Incident documentation'],
+    pains: [
+      'No structured audit trail for temperature excursions today',
+      'At scale: manual incident reporting becomes a liability',
+      'Compliance is a readiness play — becomes urgent when volumes grow or regulators audit'
+    ]
+  }
+];
+
+const MATRIX_DOTS = [
+  {
+    id: 'detect',
+    label: 'Detect',
+    cx: 0.86, cy: 0.84,
+    color: 'ok',
+    tshirt: 'XL',
+    value: 'Foundation — enables all other savings',
+    valueType: 'Risk — necessary foundation',
+    rationale: 'Nothing else works without real-time detection. Replace patient complaints with minutes-level signal.',
+    inCurve: true
+  },
+  {
+    id: 'prevention',
+    label: 'Prevention',
+    cx: 0.80, cy: 0.90,
+    color: 'ok',
+    tshirt: 'XL',
+    value: '~$330K/yr direct (monitored 5%)',
+    valueType: 'Risk — prevent before failure completes',
+    rationale: 'Proactive weather adjustments and mid-transit intervention. Scales with coverage.',
+    inCurve: true
+  },
+  {
+    id: 'attribute',
+    label: 'Attribute + Remediate',
+    cx: 0.70, cy: 0.88,
+    color: 'ok',
+    tshirt: 'XL',
+    value: 'Reduces $22M exposure on covered shipments',
+    valueType: 'Risk enabler + Scale',
+    rationale: 'Closes the loop. Structured attribution and action. Manual process breaks at scale.',
+    inCurve: true
+  },
+  {
+    id: 'cop',
+    label: 'COP Optimization',
+    cx: 0.76, cy: 0.73,
+    color: 'warn',
+    tshirt: 'L',
+    value: '~$440K/yr',
+    valueType: 'Efficiency at scale',
+    rationale: 'Right-provision once you can see what\'s needed. 2 boxes to 1 box on proven lanes.',
+    inCurve: true
+  },
+  {
+    id: 'lane',
+    label: 'Lane Optimization',
+    cx: 0.63, cy: 0.58,
+    color: 'muted',
+    tshirt: 'L',
+    value: 'Illustrative (prior calc superseded)',
+    valueType: 'Efficiency at scale',
+    rationale: 'Direct vs. hub routing. Client raised this last — lower urgency.',
+    inCurve: false
+  },
+  {
+    id: 'monitor',
+    label: 'Monitor',
+    cx: 0.83, cy: 0.26,
+    color: 'dim',
+    tshirt: 'S',
+    value: '~$26K/yr',
+    valueType: 'Efficiency (mostly solved by device adoption)',
+    rationale: 'USB-logger labor goes away through Sensos adoption, not through an agent.',
+    inCurve: false
+  },
+  {
+    id: 'report',
+    label: 'Report',
+    cx: 0.73, cy: 0.20,
+    color: 'dim',
+    tshirt: 'S',
+    value: '~$5,200/yr',
+    valueType: 'Efficiency (byproduct of automation)',
+    rationale: 'Eliminated as a byproduct of automated data collection.',
+    inCurve: false
+  },
+  {
+    id: 'pareto',
+    label: 'High-Value Pareto',
+    cx: 0.22, cy: 0.44,
+    color: 'dim',
+    tshirt: 'out of scope',
+    value: 'Out of scope',
+    valueType: 'Could solve; won\'t in this case',
+    rationale: 'Top 20% packages by value (~$2K each). Real problem, not what we\'re building here.',
+    inCurve: false
+  },
+  {
+    id: 'compliance',
+    label: 'Compliance',
+    cx: 0.15, cy: 0.78,
+    color: 'dim',
+    tshirt: 'out of scope',
+    value: 'Out of scope — this build',
+    valueType: 'High impact — readiness play',
+    rationale: 'High impact when it matters. Requires regulatory approval. Not part of this build — becomes critical when volumes grow or regulators audit. Audit trail is a byproduct of the agents we are building.',
+    inCurve: false
+  }
+];
+
+const AGENT_SPECS = {
+  si: {
+    code: 'SI',
+    name: 'Shipment Intelligence Agent',
+    tagline: 'The sensor. Watches everything, routes what matters.',
+    trigger: 'Continuous — fires on every telemetry event from Sensos labels. Also scheduled poll for weather and carrier tracking updates. Manual invocation available to any authenticated user.',
+    jtbd: 'Monitor all active shipments in real time. Classify each as normal / at-risk / failed. Route to the right agent.',
+    tools: [
+      'Sensos telemetry stream',
+      'Weather forecast API',
+      'Carrier tracking API',
+      'Threshold evaluator',
+      'Anomaly scorer',
+      'Platform API (push alert to orchestrator)'
+    ],
+    memShort: 'Current state of every active shipment; active alert queue; recent telemetry windows per shipment',
+    memLong: 'Historical baselines per lane, carrier, season; normal temperature curves by route; pattern library of what "trending toward failure" looks like before threshold crossing'
+  },
+  ra: {
+    code: 'RA',
+    name: 'Resolution Agent',
+    tagline: 'The problem-solver. Figures out what went wrong and fixes it.',
+    trigger: 'Handoff from Intelligence Agent when shipment is confirmed failed or out of range. Manual invocation by any authenticated user.',
+    jtbd: 'Attribute root cause. Select the right remediation action. Execute it. Confirm outcome on subsequent shipments from the same lane.',
+    tools: [
+      'Carrier tracking API',
+      'Weather forecast API',
+      'Shipment data store',
+      'Shipping matrix (read/write)',
+      'Cost calculator',
+      'Carrier instruction dispatch',
+      'Confidence scorer'
+    ],
+    memShort: 'Current exception context; shipment history; prior actions attempted; ops lead decisions on similar recent cases',
+    memLong: 'Root cause pattern library by lane/carrier/season; remediation effectiveness history; history of human decisions — learns what the ops lead approves'
+  },
+  pa: {
+    code: 'PA',
+    name: 'Prevention Agent',
+    tagline: 'The forward-looker. Acts before the failure starts.',
+    trigger: 'Two tracks: (1) Scheduled daily review of upcoming shipments vs. weather forecasts; (2) Event-driven handoff from Intelligence Agent when a live shipment is trending at-risk.',
+    jtbd: 'Prevent failures before they complete. Two levers: proactive weather-based config adjustment; reactive mid-transit intervention.',
+    tools: [
+      'Sensos telemetry stream',
+      'Weather forecast API',
+      'Shipment data store',
+      'Shipping matrix (read/write)',
+      'Carrier instruction dispatch',
+      'Customer notification SMS/email (direct shipments only)',
+      'Cost calculator'
+    ],
+    memShort: 'Active weather advisories and affected lanes; customers contacted today; pending delivery confirmations',
+    memLong: 'Weather-failure correlation by region and season; customer response rates by message type; which lanes are most temperature-sensitive; chronic not-home delivery patterns'
+  },
+  oa: {
+    code: 'OA',
+    name: 'Optimization Agent',
+    tagline: 'The cost-cutter. Continuously hunts for safer, cheaper ways to ship.',
+    trigger: 'Scheduled — runs as a batch process over accumulated data. Daily or weekly cycle. Not per-shipment.',
+    jtbd: 'Identify safe opportunities to reduce cost across product, lane, and network dimensions without degrading delivery performance.',
+    tools: [
+      'Shipment data store (full historical)',
+      'Cost / pricing database',
+      'Weather forecast API',
+      'Carrier tracking API',
+      'Shipping matrix (read/write)',
+      'Cost calculator',
+      'Confidence scorer'
+    ],
+    memShort: 'Current analysis cycle findings; pending recommendations awaiting approval',
+    memLong: 'Full historical performance data across product x lane x season x carrier; approved optimization history and measured outcomes; temporal patterns. Richest memory of any agent.',
+    note: 'Never auto-executes. All recommendations are structural changes — always require at least Medium approval.'
+  }
 };
 
-const LANES = [
+const RECAP_CHECKS = [
   {
-    id: 'miami-nyc',
-    name: 'Miami–NYC',
-    carrier: 'FedEx Priority · 2-day',
-    warehouse: 'Miami Fulfilment Centre',
-    product: 'Chilled Injectables',
-    status: 'warn',
-    inTransit: 12,
-    delivered: 8,
-    failed: 0,
-    activeAgents: ['RA', 'SI'],
-    lastActivity: 'Resolution Agent updated ice config · 14:32',
-    hasException: true,
-    from: { name: 'Miami',     lat: 25.8,  lon: -80.2 },
-    to:   { name: 'New York',  lat: 40.7,  lon: -74.0 },
-    carrierType: '3rd party',
-    avgCOP: 58,
-    avgTime: '2.1 days',
-    failureRate: 2.8,
-    outOfRulesRate: 4.2,
-    actions: [
-      { id: 'action-miami-review', label: 'Review exception', kind: 'review', activeOnly: true },
-    ],
+    q: 'Do you expose the agent\'s reasoning, or just the outcome?',
+    a: 'Outcome by default. Reasoning on demand. Three zoom levels.',
+    ref: '§3.5'
   },
   {
-    id: 'london-berlin',
-    name: 'London–Berlin',
-    carrier: 'DHL Express · 1-day',
-    warehouse: 'Heathrow DC',
-    product: 'Ambient',
-    status: 'ok',
-    inTransit: 8,
-    delivered: 15,
-    failed: 0,
-    activeAgents: ['SI'],
-    lastActivity: 'All in range · last checked 2h ago',
-    hasException: false,
-    from: { name: 'London',    lat: 51.5,  lon: -0.1  },
-    to:   { name: 'Berlin',    lat: 52.5,  lon:  13.4 },
-    carrierType: 'Direct',
-    avgCOP: 31,
-    avgTime: '1.1 days',
-    failureRate: 0.1,
-    outOfRulesRate: 0.2,
-    actions: [],
+    q: 'Do you show every action or only the ones that need a human?',
+    a: 'Pre-approval for routine. Escalation by type for the rest.',
+    ref: '§3.4'
   },
   {
-    id: 'nyc-boston',
-    name: 'NYC–Boston',
-    carrier: 'UPS Ground · 1-day',
-    warehouse: 'JFK Depot',
-    product: 'Chilled Injectables',
-    status: 'warn',
-    inTransit: 5,
-    delivered: 3,
-    failed: 0,
-    activeAgents: ['PA', 'SI'],
-    lastActivity: 'Prevention Agent: heat advisory, monitoring',
-    hasException: false,
-    from: { name: 'New York',  lat: 40.7,  lon: -74.0 },
-    to:   { name: 'Boston',    lat: 42.4,  lon: -71.1 },
-    carrierType: '3rd party',
-    avgCOP: 42,
-    avgTime: '0.9 days',
-    failureRate: 0.4,
-    outOfRulesRate: 0.8,
-    actions: [
-      { id: 'action-nyc-carrier', label: 'Switch to direct carrier', kind: 'reassign' },
-    ],
+    q: 'Is each service its own page, one surface, or something else?',
+    a: 'One surface. Organized by Lane, not by service.',
+    ref: '§4'
   },
   {
-    id: 'singapore-syd',
-    name: 'Singapore–SYD',
-    carrier: 'FedEx International',
-    warehouse: 'Changi Logistics',
-    product: 'Chilled Injectables',
-    status: 'ok',
-    inTransit: 14,
-    delivered: 4,
-    failed: 0,
-    activeAgents: ['OA', 'SI'],
-    lastActivity: 'Optimization rec ready · yesterday',
-    hasException: false,
-    from: { name: 'Singapore', lat:  1.3,  lon: 103.8 },
-    to:   { name: 'Sydney',    lat: -33.9, lon: 151.2 },
-    carrierType: '3rd party',
-    avgCOP: 74,
-    avgTime: '3.2 days',
-    failureRate: 0.3,
-    outOfRulesRate: 0.5,
-    actions: [
-      { id: 'act-4', label: 'Approve ice reduction · save $18K/yr', kind: 'approve', actId: 'act-4' },
-    ],
-  },
-  {
-    id: 'paris-lyon',
-    name: 'Paris–Lyon',
-    carrier: 'Chronopost · same-day',
-    warehouse: 'CDG Hub',
-    product: 'Ambient',
-    status: 'ok',
-    inTransit: 3,
-    delivered: 22,
-    failed: 0,
-    activeAgents: ['SI'],
-    lastActivity: 'All in range · last checked 4h ago',
-    hasException: false,
-    from: { name: 'Paris',     lat: 48.9,  lon:  2.3  },
-    to:   { name: 'Lyon',      lat: 45.7,  lon:  4.8  },
-    carrierType: 'Direct',
-    avgCOP: 28,
-    avgTime: '0.4 days',
-    failureRate: 0.0,
-    outOfRulesRate: 0.1,
-    actions: [],
-  },
-];
-
-// Stage pipeline for Miami–NYC lane.
-// cpo = cost contribution at this leg ($); failureRate = excursion % at this stage; carrier = leg operator.
-// Stage CPOs sum to lane avgCOP (58 for Miami-NYC). Keep STAGES lane-agnostic for demo purposes —
-// lane-level totals come from LANES; stage values give the relative cost/risk story.
-const STAGES = [
-  { id: 'origin',      label: 'Origin WH',   sub: 'Miami FC',     count: 2, status: 'done',     agent: null, cpo: 8,  failureRate: 0.1, carrier: 'Sensos WH · Direct' },
-  { id: 'linehaul',    label: 'Linehaul',     sub: 'FedEx P2D',   count: 3, status: 'done',     agent: 'SI', cpo: 14, failureRate: 0.2, carrier: 'FedEx P2D · 3rd party' },
-  { id: 'regional-dc', label: 'Regional DC',  sub: 'NJ Hub',      count: 4, status: 'done',     agent: 'SI', cpo: 6,  failureRate: 0.1, carrier: 'FedEx Regional · 3rd party' },
-  { id: 'middle-mile', label: 'Middle Mile',  sub: 'FedEx Local', count: 2, status: 'warn',     agent: 'RA', cpo: 18, failureRate: 4.2, carrier: 'FedEx Local · 3rd party' },
-  { id: 'last-mile',   label: 'Last Mile',    sub: 'FedEx City',  count: 1, status: 'ok',       agent: null, cpo: 10, failureRate: 0.8, carrier: 'FedEx City · 3rd party' },
-  { id: 'delivery',    label: 'Delivery',     sub: '',             count: 0, status: 'empty',    agent: null, cpo: 2,  failureRate: 0.0, carrier: 'Signature courier · Direct' },
-  { id: 'customer',    label: 'Customer',     sub: '8 delivered', count: 8, status: 'complete', agent: null, cpo: 0,  failureRate: 0.0, carrier: 'Customer site' },
-];
-
-
-const ACTIVITY = [
-  {
-    id: 'act-1',
-    agentId: 'RA',
-    summary: 'Updated ice config to 2 boxes for next 5 shipments. Triggered by warm readings at Middle Mile.',
-    time: 'Today 14:32',
-    statusLabel: 'Resolved',
-    statusType: 'resolved',
-    hasDrilldown: true,
-    level2: {
-      whatHappened: '3 shipments breached 6.5°C at Middle Mile between 11:00–13:30. Handed off by Shipment Intelligence.',
-      tasks: [
-        'Carrier tracking — no delays or incidents',
-        'Weather — ambient 31°C in Miami today, heat advisory active',
-        'Lane history — ice config (1 box) set Nov 2024; failure rate rises each Jun–Aug',
-        'Root cause: ice under-specified for current ambient temperature (conf. 87%)',
-        'Action: increase to 2 ice boxes, next 5 shipments',
-        'Shipping matrix updated',
-        'Warehouse instruction dispatched → confirmed received 14:31',
-        'Outcome check scheduled: shipment #4401, Thursday AM',
-      ],
-      outcome: 'Config updated. Warehouse confirmed. Outcome check scheduled for Thursday.',
-      level3: [
-        { ts: '14:30:01', line: 'Received from Shipment Intelligence Agent' },
-        { ts: '',         line: 'Shipments #4398–4400 · temps 6.8°C / 6.7°C / 6.9°C' },
-        { ts: '14:30:03', line: '→ carrier_tracking_api', tool: true },
-        { ts: '',         line: 'Query: shipments #4398–4400' },
-        { ts: '',         line: 'Result: no delays, no scan gaps' },
-        { ts: '',         line: '→ Carrier not at fault', note: true },
-        { ts: '14:30:05', line: '→ weather_forecast_api', tool: true },
-        { ts: '',         line: 'Query: Miami, today' },
-        { ts: '',         line: 'Result: 31°C ambient, heat advisory active' },
-        { ts: '',         line: '→ Elevated ambient vs. seasonal baseline', note: true },
-        { ts: '14:30:08', line: '→ shipment_data_store', tool: true },
-        { ts: '',         line: 'Query: Miami–NYC, last 90 days' },
-        { ts: '',         line: 'Result: failure rate 0% Oct–Apr, 4.2% Jun–Aug' },
-        { ts: '',         line: '        ice config: 1 box since Nov 2024 (unchanged)' },
-        { ts: '',         line: '→ Seasonal mismatch. Config set in winter, not updated.', note: true },
-        { ts: '14:30:11', line: 'Confidence: 87% ice (primary) · 13% carrier (alt.)' },
-        { ts: '',         line: 'Auto-execute threshold: 80% · Decision tier: Small → auto' },
-        { ts: '14:30:12', line: '→ shipping_matrix (write)', tool: true },
-        { ts: '',         line: 'Miami–NYC: 1 box → 2 boxes · next 5 shipments' },
-        { ts: '14:30:14', line: '→ carrier_instruction_dispatch', tool: true },
-        { ts: '',         line: 'Miami FC instruction sent · ACK received 14:31:02' },
-        { ts: '14:31:05', line: 'Outcome check scheduled · shipment #4401 · Thursday AM' },
-      ],
-    },
-  },
-  {
-    id: 'act-2',
-    agentId: 'PA',
-    summary: 'Heat advisory on Miami route Tue–Wed. Bumped 3 at-risk shipments to overnight. FedEx instruction dispatched.',
-    time: 'Today 09:15',
-    statusLabel: 'Done',
-    statusType: 'done',
-    hasDrilldown: false,
-  },
-  {
-    id: 'act-3',
-    agentId: 'YOU',
-    summary: 'Approved: reduce ice to 1 box on overnight shipments Nov–Feb. (Optimization Agent recommendation)',
-    time: 'Yesterday 17:43',
-    statusLabel: 'Approved',
-    statusType: 'approved',
-    hasDrilldown: false,
-    approvedBy: 'Ops Lead',
-    approvedAt: 'Yesterday 17:43',
-  },
-  {
-    id: 'act-4',
-    agentId: 'OA',
-    summary: 'Recommendation: overnight shipments consistently hold in range with 1 ice box in winter. Projected saving: $18K/yr. Confidence: 91%.',
-    time: 'Yesterday 16:01',
-    statusLabel: 'Pending review',
-    statusType: 'pending',
-    isPending: true,
-    laneId: 'miami-nyc',
-    projectedValue: '$18K/yr saving',
-    hasDrilldown: true,
-    level2: {
-      whatHappened: 'Analysis of 90-day shipment data on Miami–NYC. Overnight shipments (Nov–Feb) deliver in range with 1 ice box — consistent across 3 winters.',
-      tasks: [
-        'Analysed 847 shipments on Miami–NYC, Nov–Mar period',
-        'Segmented by ice config: 1-box vs 2-box overnight shipments',
-        '1-box overnight failure rate: 0.2% (well within 2% threshold)',
-        'Projected saving: $18,200/yr at current volume',
-        'Validated against seasonal variance — consistent across 3 winters',
-        'Recommendation confidence: 91%',
-      ],
-      outcome: 'Pending ops lead approval. No action taken until approved.',
-      level3: [
-        { ts: '16:00:03', line: 'Scheduled analysis batch initiated' },
-        { ts: '16:00:05', line: '→ shipment_data_store', tool: true },
-        { ts: '',         line: 'Query: Miami–NYC, Nov 2023–Mar 2025, overnight shipments' },
-        { ts: '',         line: 'Result: 847 shipments · ice config breakdown:' },
-        { ts: '',         line: '  1-box overnight: 412 shipments, 0.2% failure rate' },
-        { ts: '',         line: '  2-box overnight: 435 shipments, 0.1% failure rate' },
-        { ts: '',         line: '→ Delta within noise threshold', note: true },
-        { ts: '16:00:09', line: '→ cost_calculator', tool: true },
-        { ts: '',         line: '1-box vs 2-box overnight, 6000/day × 5% × seasonal ratio' },
-        { ts: '',         line: 'Projected saving: $18,200/yr' },
-        { ts: '16:00:12', line: 'Confidence: 91% · Min data threshold: 50 obs · Actual: 412' },
-        { ts: '',         line: 'Decision tier: Large → requires ops lead approval' },
-        { ts: '16:00:14', line: 'Recommendation drafted and queued for review' },
-      ],
-    },
-  },
-  {
-    id: 'act-5',
-    agentId: 'SI',
-    summary: 'Daily scan complete. 11 shipments in range, 3 flagged at-risk, routed to Resolution Agent.',
-    time: 'Yesterday 08:00',
-    statusLabel: 'Routed',
-    statusType: 'routed',
-    hasDrilldown: false,
-  },
-];
-
-const EXCEPTION = {
-  laneId: 'miami-nyc',
-  laneName: 'Miami–NYC',
-  agentId: 'RA',
-  time: '14:32',
-  description: '3 shipments trending above 6.5°C at Middle Mile stage.',
-  attribution: 'Ice config under-specified for current ambient temperature (87% confidence).',
-  proposed: 'Increase to 2-ice-box config for next 5 shipments.',
-  costImpact: '+$37 est.',
-  tier: 'Small — auto-executable',
-  confidence: 87,
-};
-
-const LANE_CONFIG = {
-  iceConfig: '2 boxes · chilled injectables',
-  carrier: 'FedEx Priority · 2-day transit',
-  dispatchWindow: '06:00 – 10:00',
-  rules: [
-    'Summer overnight uplift (Jun–Aug)',
-    'Min 2 ice boxes (chilled)',
-    'Max 2-day transit',
-  ],
-  externalRisk: 'Heat advisory active (Miami) · Tue–Wed',
-};
-
-// Products
-const PRODUCTS = [
-  {
-    id: 'chilled-injectables',
-    name: 'Chilled Injectables',
-    category: 'Temperature-sensitive',
-    range: '2–8°C',
-    lanes: ['miami-nyc', 'nyc-boston', 'singapore-syd'],
-    activeAgents: ['SI', 'RA', 'PA', 'OA'],
-    status: 'warn',
-    config: {
-      iceConfig: '2 boxes (updated 14 Jun)',
-      transitLimit: '48h max',
-      dispatchWindow: '06:00 – 10:00',
-      packagingSpec: 'Validated shipper · foam insert',
-    },
-    rules: [
-      'Summer overnight uplift (Jun–Aug)',
-      'Min 2 ice boxes — updated by Resolution Agent 14 Jun',
-      'Max 48h transit',
-      'Pre-shipment temp check required',
-    ],
-    optimizations: [
-      { id: 'opt-1', status: 'applied', label: 'Reduce ice to 1 box on overnight Nov–Feb', agent: 'OA', date: 'Yesterday', saving: '$18K/yr', confidence: 91, approvedBy: 'Ops Lead', approvedAt: 'Yesterday 17:43' },
-      { id: 'opt-2', status: 'applied', label: 'Summer uplift dispatch window tightened to 06:00–08:00', agent: 'PA', date: '3 weeks ago', saving: '0 excursions', confidence: 94, approvedBy: 'Ops Lead', approvedAt: '3 weeks ago' },
-    ],
-    history: '4.2% out-of-range rate in Jun (ice mismatch). Corrected by Resolution Agent 14 Jun. 0% since.',
-  },
-  {
-    id: 'humira-40mg',
-    name: 'Humira 40mg',
-    category: 'Biologic',
-    range: '2–8°C',
-    lanes: ['miami-nyc'],
-    activeAgents: ['SI', 'RA'],
-    status: 'warn',
-    config: {
-      iceConfig: '2 boxes',
-      transitLimit: '48h max',
-      dispatchWindow: '06:00 – 09:00',
-      packagingSpec: 'Insulated shipper · 72h validated',
-    },
-    rules: [
-      'High-value alert threshold: >$2,000/shipment',
-      'Resolution Agent auto-escalates if reading >7.5°C',
-      'Carrier signature required on delivery',
-    ],
-    optimizations: [
-      { id: 'opt-3', status: 'pending', label: 'Extend dispatch window to 10:00 on low-heat days', agent: 'OA', date: 'Today', saving: '+3 shipments/day flexibility', confidence: 78, approvedBy: null, approvedAt: null },
-    ],
-    history: '2 shipments trending warm at Middle Mile today. Resolution Agent monitoring.',
-  },
-  {
-    id: 'ambient',
-    name: 'Ambient Products',
-    category: 'Non-temperature-sensitive',
-    range: '15–25°C',
-    lanes: ['london-berlin', 'paris-lyon'],
-    activeAgents: ['SI'],
-    status: 'ok',
-    config: {
-      iceConfig: 'None',
-      transitLimit: '72h max',
-      dispatchWindow: 'Any time',
-      packagingSpec: 'Standard carton',
-    },
-    rules: [
-      'No cold-chain requirements',
-      'Standard transit SLA: 72h',
-      'Automated scan at each DC',
-    ],
-    optimizations: [
-      { id: 'opt-4', status: 'applied', label: 'Consolidated Paris–Lyon runs to 3x/week from daily', agent: 'OA', date: '6 weeks ago', saving: '$6K/yr', confidence: 96, approvedBy: 'Ops Lead', approvedAt: '6 weeks ago' },
-    ],
-    history: 'No excursions in 6 months. Baseline performance.',
-  },
-];
-
-// All shipments (live + delivered). Single source of truth — replaces LIVE_SHIPMENTS + MIDDLE_MILE_SHIPMENTS.
-const SHIPMENTS = [
-  // Live
-  {
-    id: '#4471', laneId: 'miami-nyc', product: 'Chilled Injectables',
-    status: 'live', stageId: 'middle-mile', stage: 'Middle Mile',
-    temp: '6.8°C', tempStatus: 'warn', eta: '3h',
-    events: [
-      { time: '14:32', agentId: 'RA', text: 'Ice config updated to 2 boxes · applied to next 5 shipments' },
-      { time: '14:08', agentId: 'SI', text: 'Temp 6.8°C at Middle Mile · flagged and routed to RA' },
-      { time: '11:04', agentId: 'SI', text: 'Departed Regional DC · sensors nominal' },
-    ],
-  },
-  {
-    id: '#4398', laneId: 'miami-nyc', product: 'Humira 40mg',
-    status: 'live', stageId: 'middle-mile', stage: 'Middle Mile',
-    temp: '6.8°C', tempStatus: 'warn', eta: '3.5h',
-    events: [
-      { time: '14:08', agentId: 'SI', text: 'Temp 6.8°C at Middle Mile · flagged and routed to RA' },
-      { time: '11:04', agentId: 'SI', text: 'Departed Regional DC · sensors nominal' },
-    ],
-  },
-  {
-    id: '#4399', laneId: 'miami-nyc', product: 'Humira 40mg',
-    status: 'live', stageId: 'middle-mile', stage: 'Middle Mile',
-    temp: '6.7°C', tempStatus: 'warn', eta: '3.5h',
-    events: [
-      { time: '14:08', agentId: 'SI', text: 'Temp 6.7°C at Middle Mile · flagged alongside #4398' },
-      { time: '11:22', agentId: 'SI', text: 'Departed Regional DC · sensors nominal' },
-    ],
-  },
-  {
-    id: '#4472', laneId: 'miami-nyc', product: 'Humira 40mg',
-    status: 'live', stageId: 'linehaul', stage: 'Linehaul',
-    temp: '5.2°C', tempStatus: 'ok', eta: '5h',
-    events: [
-      { time: '10:30', agentId: 'SI', text: 'Departed Miami FC · all sensors nominal' },
-      { time: '06:12', agentId: 'SI', text: 'Shipment dispatched · ice config 2 boxes' },
-    ],
-  },
-  {
-    id: '#4468', laneId: 'london-berlin', product: 'Ambient',
-    status: 'live', stageId: 'last-mile', stage: 'Last Mile',
-    temp: '19°C', tempStatus: 'ok', eta: '40m',
-    events: [
-      { time: '09:02', agentId: 'PA', text: 'Temp nudging upper limit · monitoring' },
-      { time: '08:15', agentId: 'SI', text: 'Cleared Regional DC · on schedule' },
-    ],
-  },
-  {
-    id: '#4460', laneId: 'nyc-boston', product: 'Chilled Injectables',
-    status: 'live', stageId: 'last-mile', stage: 'Last Mile',
-    temp: '5.9°C', tempStatus: 'ok', eta: '1.5h',
-    events: [
-      { time: '09:15', agentId: 'PA', text: 'Bumped to overnight dispatch · heat advisory Tue-Wed' },
-      { time: '07:00', agentId: 'SI', text: 'Departed JFK Depot · sensors nominal' },
-    ],
-  },
-  {
-    id: '#4455', laneId: 'singapore-syd', product: 'Chilled Injectables',
-    status: 'live', stageId: 'middle-mile', stage: 'Middle Mile',
-    temp: '4.8°C', tempStatus: 'ok', eta: '18h',
-    events: [
-      { time: '08:51', agentId: 'SI', text: 'Departed Singapore · all sensors nominal' },
-      { time: 'Yesterday', agentId: 'SI', text: 'Pre-shipment check passed · Changi Logistics' },
-    ],
-  },
-  {
-    id: '#4451', laneId: 'singapore-syd', product: 'Chilled Injectables',
-    status: 'live', stageId: 'regional-dc', stage: 'Regional DC',
-    temp: '5.1°C', tempStatus: 'ok', eta: '22h',
-    events: [
-      { time: '06:30', agentId: 'SI', text: 'Arrived Regional DC · in range' },
-      { time: 'Yesterday', agentId: 'SI', text: 'Departed Singapore · sensors nominal' },
-    ],
-  },
-  {
-    id: '#4466', laneId: 'paris-lyon', product: 'Ambient',
-    status: 'live', stageId: 'last-mile', stage: 'Last Mile',
-    temp: '21°C', tempStatus: 'ok', eta: '25m',
-    events: [
-      { time: '13:45', agentId: 'SI', text: 'Last-mile handoff complete · in range' },
-      { time: '12:00', agentId: 'SI', text: 'Departed CDG Hub on schedule' },
-    ],
-  },
-  // Delivered
-  {
-    id: '#4465', laneId: 'paris-lyon', product: 'Ambient',
-    status: 'delivered', stageId: 'customer', stage: 'Customer',
-    temp: '20°C', tempStatus: 'ok',
-    deliveredAt: 'Yesterday 16:21', outcome: 'In range',
-    events: [
-      { time: 'Yesterday 16:21', agentId: 'SI', text: 'Delivered in range · Paris-Lyon' },
-      { time: 'Yesterday 15:00', agentId: 'SI', text: 'Last-mile handoff complete · on schedule' },
-    ],
-  },
-  {
-    id: '#4462', laneId: 'london-berlin', product: 'Ambient',
-    status: 'delivered', stageId: 'customer', stage: 'Customer',
-    temp: '18°C', tempStatus: 'ok',
-    deliveredAt: 'Today 09:12', outcome: 'In range',
-    events: [
-      { time: 'Today 09:12', agentId: 'SI', text: 'Delivered in range · London-Berlin' },
-      { time: 'Today 08:00', agentId: 'SI', text: 'Last-mile departure confirmed · DHL on time' },
-    ],
-  },
-  {
-    id: '#4450', laneId: 'miami-nyc', product: 'Chilled Injectables',
-    status: 'delivered', stageId: 'customer', stage: 'Customer',
-    temp: '5.4°C', tempStatus: 'ok',
-    deliveredAt: 'Yesterday 14:05', outcome: 'Out of range (resolved)',
-    events: [
-      { time: 'Yesterday 14:05', agentId: 'SI', text: 'Delivered · out-of-range flag cleared by Resolution Agent' },
-      { time: 'Yesterday 11:30', agentId: 'RA', text: 'Temp excursion resolved · config corrected for subsequent shipments' },
-      { time: 'Yesterday 09:00', agentId: 'SI', text: 'Flagged at Middle Mile · 7.1°C · routed to RA' },
-    ],
-  },
-  {
-    id: '#4448', laneId: 'nyc-boston', product: 'Chilled Injectables',
-    status: 'delivered', stageId: 'customer', stage: 'Customer',
-    temp: '5.7°C', tempStatus: 'ok',
-    deliveredAt: 'Yesterday 11:22', outcome: 'In range',
-    events: [
-      { time: 'Yesterday 11:22', agentId: 'SI', text: 'Delivered in range · NYC-Boston' },
-      { time: 'Yesterday 09:00', agentId: 'PA', text: 'Overnight uplift effective · no excursion' },
-    ],
-  },
-  {
-    id: '#4440', laneId: 'singapore-syd', product: 'Chilled Injectables',
-    status: 'delivered', stageId: 'customer', stage: 'Customer',
-    temp: '4.9°C', tempStatus: 'ok',
-    deliveredAt: '2 days ago', outcome: 'In range',
-    events: [
-      { time: '2 days ago 10:15', agentId: 'SI', text: 'Delivered in range · Singapore-SYD' },
-      { time: '2 days ago 08:00', agentId: 'SI', text: 'Cleared customs · last-mile commenced' },
-    ],
-  },
-];
-
-// Agent activity feed shown on Overview > Live shipments, newest first
-const SHIPMENT_UPDATES = [
-  { time: '14:32', agentId: 'RA', text: '#4471 ice config updated · 2 boxes for next 5 shipments' },
-  { time: '14:08', agentId: 'SI', text: '#4471 temp 6.8°C at Middle Mile · flagged and routed to RA' },
-  { time: '09:15', agentId: 'PA', text: '#4460 bumped to overnight dispatch · heat advisory Tue-Wed' },
-  { time: '09:02', agentId: 'PA', text: '#4468 temp nudging upper limit · monitoring' },
-  { time: '08:51', agentId: 'SI', text: '#4455 departed Singapore · all sensors nominal' },
-  { time: 'Yesterday', agentId: 'SI', text: '#4466 delivered in range · Paris-Lyon' },
-];
-
-// Popup queue used by the simulation
-const POPUP_SCENARIOS = [
-  {
-    type: 'info',
-    agentId: 'SI',
-    title: 'Daily scan complete',
-    body: '47 shipments scanned across 5 lanes. All in range. 1 at-risk flagged and routed.',
-    lane: 'miami-nyc',
-    laneName: 'Miami–NYC',
-  },
-  {
-    type: 'escalation',
-    agentId: 'PA',
-    title: 'Weather advisory — action required',
-    body: 'Extended heat forecast (Wed–Fri) affects 6 lanes. Overnight uplift recommended for 14 shipments. Est. cost: +$420.',
-    lane: 'nyc-boston',
-    laneName: 'NYC–Boston',
-  },
+    q: 'How does the surface avoid being a dashboard?',
+    a: 'It speaks first. Agent as author. Ops lead as editor.',
+    ref: '§4'
+  }
 ];
