@@ -102,7 +102,7 @@ const speakerNotes = {
   10: 'Click the log levels live. Start at L1 (outcome), expand to L2 (tasks), expand to L3 (trace). Principle: outcome by default, everything expandable on demand.',
   11: 'Four loops. Cross-entity is the moat — say it clearly. No individual customer accumulates this breadth of signal. Sensos does.',
   12: 'Set the frame first: the game metaphor. Then walk the three entities. Lanes are where decisions live. Agents and humans are both participants — neither is just watching. Note that this is a simplified view.',
-  13: 'Three things the tool does: acts, surfaces, lets the user drive. These aren\'t features — they\'re the design principle behind the UI.',
+  13: 'Four design principles. Acts, surfaces, lets the user drive — and lives in the tools they already use. The last one matters: no new inbox. Agents reach into Slack, Monday, ServiceNow. The ops team doesn\'t change how they work.',
   14: 'Before you open the demo: set expectations. Wireframe, not everything wired. The point is the vision of how the ops team experiences this — not a production build. Then open it and walk: quiet state → active state → Miami-NYC lane → expand L2 → L3 → approve.',
   15: 'Tick the four questions. Then the expansion path. End on: approved decisions become rules, rules enable autonomy, autonomy expands as trust is earned.',
   16: 'Thank you. Open for questions. You have the content — stay in the detail wherever they push.'

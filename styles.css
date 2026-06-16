@@ -1569,6 +1569,15 @@ a { text-decoration: none; color: inherit; }
 }
 .intent-title { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
 .intent-body { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+.intent-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.intent-tool-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 2px 8px;
+}
 
 .game-metaphor {
   margin-top: 20px;
