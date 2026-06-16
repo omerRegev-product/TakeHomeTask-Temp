@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>Sensos — Ops Intelligence Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 0 — TITLE
+══════════════════════════════════════════════════════════ -->
+<div id="screen-title" class="screen active">
+  <div class="title-inner">
+    <svg class="logo-hero" viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer hexagon (isometric cube silhouette) -->
+      <path class="logo-path"
+        d="M30 3 L57 19 L57 51 L30 67 L3 51 L3 19 Z"
+        stroke="white" stroke-width="1.2" stroke-linejoin="round"/>
+      <!-- Top face -->
+      <path class="logo-path"
+        d="M30 3 L57 19 L30 35 L3 19 Z"
+        stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+      <!-- Left face -->
+      <path class="logo-path"
+        d="M3 19 L3 51 L30 67 L30 35 Z"
+        stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+      <!-- Right face -->
+      <path class="logo-path"
+        d="M57 19 L57 51 L30 67 L30 35 Z"
+        stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+      <!-- Inner structural lines -->
+      <line class="logo-path" x1="30" y1="35" x2="30" y2="3"  stroke="white" stroke-width="0.7" stroke-opacity="0.3"/>
+      <line class="logo-path" x1="3"  y1="19" x2="57" y2="19" stroke="white" stroke-width="0.7" stroke-opacity="0.25"/>
+    </svg>
+    <div class="title-wordmark">SENSOS</div>
+    <div class="title-enter">Click anywhere to enter</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 1 — MAIN VIEW
+══════════════════════════════════════════════════════════ -->
+<div id="screen-main" class="screen">
+  <div class="layout">
+    <aside class="sidebar" data-sidebar="overview"></aside>
+    <div class="main">
+      <div class="briefing-bar" id="main-briefing"></div>
+      <div class="overview-split">
+        <div class="overview-left">
+          <div id="fleet-summary-strip" class="fleet-summary-strip"></div>
+          <!-- Tab switcher -->
+          <div class="overview-tabs" id="overview-tabs">
+            <button class="overview-tab-btn active" data-tab="live" onclick="setOverviewTab('live')">Live shipments</button>
+            <button class="overview-tab-btn" data-tab="status" onclick="setOverviewTab('status')">Lane status</button>
+          </div>
+          <!-- Live shipments panel -->
+          <div id="overview-live" class="overview-panel">
+            <div id="main-approvals"></div>
+            <div id="overview-shipments"></div>
+          </div>
+          <!-- Lane status panel -->
+          <div id="overview-status" class="overview-panel" style="display:none"></div>
+        </div>
+        <div class="overview-map-panel">
+          <div id="world-map-container"></div>
+          <!-- Map controls overlay — shown on Lane status tab only -->
+          <div id="map-controls" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- #screen-main -->
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 2 — LANE DETAIL
+══════════════════════════════════════════════════════════ -->
+<div id="screen-lane" class="screen">
+  <div class="layout">
+    <aside class="sidebar" data-sidebar="lanes"></aside>
+
+    <!-- Lane main -->
+    <!-- Floating agent command bar -->
+    <div class="lane-command-bar" id="lane-command-bar">
+      <div class="lane-command-agents-label">
+        <span class="lcb-dot"></span>4 agents active
+      </div>
+      <input class="lane-command-input" id="lane-command-input"
+             type="text" autocomplete="off" spellcheck="false"
+             placeholder="Ask the agents to act on this lane...">
+      <button class="lane-command-send" id="lane-command-send" aria-label="Send">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="lane-main">
+
+      <!-- Lane header -->
+      <div class="lane-header" id="lane-header-content">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Lane metrics strip -->
+      <div class="lane-metrics-strip" id="lane-metrics-strip">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Stage pipeline -->
+      <div class="stage-pipeline-wrap">
+        <div class="pipeline-label">Shipment journey</div>
+        <div class="stage-pipeline" id="stage-pipeline">
+          <!-- Rendered by JS -->
+        </div>
+        <!-- Shipment expansion (Middle Mile) -->
+        <div class="stage-shipments" id="stage-shipments-wrap">
+          <div id="stage-shipments-inner"></div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs-bar">
+        <button class="tab-btn" data-tab="history">History</button>
+        <button class="tab-btn active" data-tab="live">
+          Live <span class="tab-live-dot"></span>
+        </button>
+        <button class="tab-btn" data-tab="outlook">Outlook</button>
+      </div>
+
+      <!-- Tab body -->
+      <div id="tab-live" style="flex:1;min-height:0;overflow:hidden;display:flex">
+        <div class="activity-feed-wrap">
+          <div id="activity-feed">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+        <aside class="config-panel">
+          <div id="config-panel-content">
+            <!-- Rendered by JS -->
+          </div>
+        </aside>
+      </div>
+
+      <!-- History tab -->
+      <div id="tab-history" class="history-content" style="display:none;flex:1;overflow-y:auto">
+        <div class="history-chart-title">Out-of-range rate (%) — last 6 months</div>
+        <div class="mini-chart">
+          <div class="chart-bar" style="height:8%"  data-val="0.1%"></div>
+          <div class="chart-bar" style="height:14%" data-val="0.2%"></div>
+          <div class="chart-bar" style="height:0%"  data-val="0.0%"></div>
+          <div class="chart-bar warn" style="height:100%" data-val="4.2%"></div>
+          <div class="chart-bar" style="height:12%" data-val="0.1%"></div>
+          <div class="chart-bar" style="height:0%"  data-val="0.0%"></div>
+        </div>
+        <div class="chart-months">
+          <span class="chart-month">Jan</span>
+          <span class="chart-month">Feb</span>
+          <span class="chart-month">Mar</span>
+          <span class="chart-month">Jun</span>
+          <span class="chart-month">Jul</span>
+          <span class="chart-month">Aug</span>
+        </div>
+        <div style="margin-top:20px;font-size:12px;color:var(--muted);line-height:1.7">
+          Jun spike caused by seasonal ice config mismatch. Resolution Agent corrected config on 14 Jun.
+          Subsequent months returned to baseline.
+        </div>
+      </div>
+
+      <!-- Outlook tab -->
+      <div id="tab-outlook" class="outlook-content" style="display:none;flex:1;overflow-y:auto">
+        <div class="outlook-item">
+          <span class="outlook-icon">⚠</span>
+          <div class="outlook-text">
+            <strong>Heat advisory — Tue–Wed</strong>
+            <span>Ambient temps forecast above 30°C in Miami. Prevention Agent monitoring 8 upcoming shipments. No action required yet.</span>
+          </div>
+        </div>
+        <div class="outlook-item">
+          <span class="outlook-icon">📦</span>
+          <div class="outlook-text">
+            <strong>14 shipments dispatching tomorrow</strong>
+            <span>Scheduled 06:00–10:00. 2 flagged for overnight uplift by Prevention Agent (pending weather confirmation).</span>
+          </div>
+        </div>
+        <div class="outlook-item">
+          <span class="outlook-icon">💡</span>
+          <div class="outlook-text">
+            <strong>Optimization recommendation pending</strong>
+            <span>Reduce ice to 1 box on overnight shipments Nov–Feb. Projected saving $18K/yr. Awaiting your approval.</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- .lane-main -->
+  </div><!-- .layout -->
+</div><!-- #screen-lane -->
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 3 — AGENTS
+══════════════════════════════════════════════════════════ -->
+<div id="screen-agents" class="screen">
+  <div class="layout">
+    <aside class="sidebar" data-sidebar="agents"></aside>
+    <div class="agents-main">
+      <div class="agents-header">
+        <div class="agents-title">Agents</div>
+        <div class="agents-subtitle">4 agents active · All systems operational</div>
+      </div>
+      <div class="agents-body">
+        <div class="agents-constellation" id="agents-constellation">
+          <!-- Rendered by JS -->
+        </div>
+        <div class="agent-detail-panel" id="agent-detail-panel">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- #screen-agents -->
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 4 — PRODUCTS LIST
+══════════════════════════════════════════════════════════ -->
+<div id="screen-products" class="screen">
+  <div class="layout">
+    <aside class="sidebar" data-sidebar="products"></aside>
+    <div class="products-main">
+      <div class="briefing-bar" style="justify-content:flex-start;gap:16px">
+        <div class="briefing-text"><strong>3 products</strong> · 2 chilled · 1 ambient · 1 optimization pending approval</div>
+        <div class="briefing-status"><span class="briefing-dot"></span>All in spec</div>
+      </div>
+      <div class="content-scroll">
+        <div class="section-label">Products</div>
+        <div class="lane-list" id="products-lane-list">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- #screen-products -->
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 5 — MANAGE LANES
+══════════════════════════════════════════════════════════ -->
+<div id="screen-lanes" class="screen">
+  <div class="layout">
+    <aside class="sidebar" data-sidebar="lanes"></aside>
+    <div class="products-main">
+      <div class="briefing-bar" id="lanes-briefing" style="justify-content:flex-start;gap:16px">
+        <!-- Rendered by JS -->
+      </div>
+      <div class="content-scroll">
+        <div class="section-label-row">
+          <div class="section-label" style="padding-top:0">Manage lanes</div>
+          <button class="lanes-add-btn" onclick="showToast('Adding lanes is disabled in this demo')">+ Add lane</button>
+        </div>
+        <div class="lane-list" id="lanes-list">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- #screen-lanes -->
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 6 — PRODUCT DETAIL
+══════════════════════════════════════════════════════════ -->
+<div id="screen-product" class="screen">
+  <div class="layout">
+    <aside class="sidebar" data-sidebar="products"></aside>
+    <div class="lane-main">
+      <div class="lane-header" id="product-header-content"><!-- Rendered by JS --></div>
+      <div id="tab-product-live" style="flex:1;min-height:0;overflow:hidden;display:flex">
+        <div class="activity-feed-wrap" id="product-feed"><!-- Rendered by JS --></div>
+        <aside class="config-panel" id="product-config-panel"><!-- Rendered by JS --></aside>
+      </div>
+    </div>
+  </div>
+</div><!-- #screen-product -->
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 7 — SHIPMENTS LIST
+══════════════════════════════════════════════════════════ -->
+<div id="screen-shipments" class="screen">
+  <div class="layout">
+    <aside class="sidebar" data-sidebar="shipments"></aside>
+    <div class="products-main">
+      <div class="briefing-bar" id="shipments-briefing" style="justify-content:flex-start;gap:16px">
+        <!-- Rendered by JS -->
+      </div>
+      <div class="content-scroll">
+        <div class="section-label-row">
+          <div class="section-label" style="padding-top:0">Shipments</div>
+          <div class="shipments-filter" id="shipments-filter">
+            <button class="ship-filter-btn active" data-f="all" onclick="setShipmentFilter('all')">All</button>
+            <button class="ship-filter-btn" data-f="live" onclick="setShipmentFilter('live')">Live</button>
+            <button class="ship-filter-btn" data-f="delivered" onclick="setShipmentFilter('delivered')">Delivered</button>
+          </div>
+        </div>
+        <div class="lane-list" id="shipments-list">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- #screen-shipments -->
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 8 — SHIPMENT DETAIL
+══════════════════════════════════════════════════════════ -->
+<div id="screen-shipment" class="screen">
+  <div class="layout">
+    <aside class="sidebar" data-sidebar="shipments"></aside>
+
+    <!-- Floating agent command bar -->
+    <div class="lane-command-bar" id="shipment-command-bar">
+      <div class="lane-command-agents-label">
+        <span class="lcb-dot"></span>4 agents active
+      </div>
+      <input class="lane-command-input" id="shipment-command-input"
+             type="text" autocomplete="off" spellcheck="false"
+             placeholder="Ask the agents about this shipment...">
+      <button class="lane-command-send" id="shipment-command-send" aria-label="Send">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="lane-main">
+      <!-- Shipment header -->
+      <div class="lane-header" id="shipment-header-content">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Journey pipeline -->
+      <div class="stage-pipeline-wrap">
+        <div class="pipeline-label">Shipment journey</div>
+        <div class="stage-pipeline" id="shipment-pipeline">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="shipment-timeline-wrap">
+        <div class="section-label" style="padding:16px 24px 8px">Activity</div>
+        <div class="updates-feed" id="shipment-timeline">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div><!-- .lane-main -->
+  </div><!-- .layout -->
+</div><!-- #screen-shipment -->
+
+<!-- ══════════════════════════════════════════════════════════
+     AGENT POPUP CONTAINER (fixed, all screens)
+══════════════════════════════════════════════════════════ -->
+<div id="popup-container"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     DEMO CONTROLS (presentation only)
+══════════════════════════════════════════════════════════ -->
+<div id="demo-controls">
+  <span class="demo-label">Scenario</span>
+  <div class="demo-toggle">
+    <button class="demo-toggle-btn active" data-mode="quiet">Quiet</button>
+    <button class="demo-toggle-btn" data-mode="active">Exception</button>
+  </div>
+  <button class="demo-sim-btn" id="demo-sim-btn">Simulate agent →</button>
+  <button class="demo-restart-btn" id="demo-restart-btn">↺ Restart</button>
+</div>
+
+<!-- Toast container -->
+<div id="demo-toast-container"></div>
+
+<!-- Scripts -->
+<script src="data.js"></script>
+<script src="map-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
