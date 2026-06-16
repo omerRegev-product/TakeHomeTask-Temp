@@ -751,6 +751,7 @@
       </div>
       <div class="eval-body moat-body">What worked on Lane A becomes a recommendation for Lane B. Pattern on one product informs another with the same temp profile. Across Sensos customers: aggregate rules, not raw data — defensible for pharma. No individual customer accumulates this breadth of signal. Sensos does.</div>
     </div>
+    <div class="eval-appendix-note anim">Success metrics — what we're measuring toward — are defined in appendix slide B (after the Thanks slide).</div>
   </div>
 </section>
 
@@ -971,6 +972,262 @@
   </div>
 </section>
 
+<!-- ══ APPENDIX OVERLAY (inside stage — inherits zoom) ════ -->
+<div id="appendix-overlay">
+  <div class="appendix-chrome">
+    <div class="appendix-tabs">
+      <button class="appendix-tab active" data-panel="appendix-a">A — Assumptions</button>
+      <button class="appendix-tab" data-panel="appendix-b">B — Success Metrics</button>
+      <button class="appendix-tab" data-panel="appendix-c">C — Future Scope</button>
+    </div>
+    <button id="appendix-close">← Back to deck</button>
+  </div>
+
+  <!-- Panel A: Assumptions -->
+  <div class="appendix-panel active" id="appendix-a"
+       data-notes="Pull this up if anyone challenges a specific number. Column 1 traces every figure to the Daniel call or flags it as inference. Column 2 is the hidden model assumptions — the integration bets. The 'shipping matrix writable + carriers accept mid-shipment instructions' row (in orange) is the one Yair is most likely to push on — it's a real dependency, not a given. Column 3 shows the deliberate editorial cuts: considered and removed, not missed.">
+
+    <div class="slide-label">Appendix A — Assumptions</div>
+    <h1 class="slide-heading" style="font-size:23px;margin-bottom:14px">What we assumed — and where it came from.</h1>
+
+    <div class="assumptions-3col">
+
+      <div class="assumptions-col">
+        <div class="assumptions-col-label">
+          Economic calibration
+          <span class="assumptions-col-sub">From the Daniel call · visible in §0 / §2a</span>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">6,000 packages/day</div>
+          <div class="assumption-item-src">Daniel — Head of Ops, UK D2C Rx</div>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">5% sample = 300/day · assumed representative</div>
+          <div class="assumption-item-src">Patterns on 5% generalise to all 6,000</div>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">2% out-of-range rate</div>
+          <div class="assumption-item-src">Daniel — "98% success is the industry standard"</div>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">$500 avg package value</div>
+          <div class="assumption-item-src">Daniel: £150–500 range · conservative midpoint</div>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">$1 COP · ice = 40% = $0.40/package</div>
+          <div class="assumption-item-src">Daniel: £1–1.5 COP · simplified</div>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">$22M/yr = 6,000 × 2% × $500 × 365</div>
+          <div class="assumption-item-src">Exposure across all shipments (not just monitored)</div>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">$440K/yr = ~20% ice saving on proven lanes</div>
+          <div class="assumption-item-src">2-box → 1-box where data supports it</div>
+        </div>
+      </div>
+
+      <div class="assumptions-col">
+        <div class="assumptions-col-label">
+          Operational / integration
+          <span class="assumptions-col-sub">Embedded in the model · not on slides</span>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">~30% of failures are preventable</div>
+          <div class="assumption-item-src">Drives Prevention ~$330K/yr on the 5%</div>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">Ops labour ≈ $50/hr · 2 people × 1hr/day</div>
+          <div class="assumption-item-src">Drives Monitor ~$26K and Report ~$5.2K figures</div>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">Telemetry real-time · labels already on the 5%</div>
+          <div class="assumption-item-src">No new hardware needed for this build</div>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">Carrier APIs expose scan + delivery-attempt data</div>
+          <div class="assumption-item-src">Needed for root-cause attribution</div>
+        </div>
+        <div class="assumption-item warn">
+          <div class="assumption-item-key">Shipping matrix writable · carriers accept mid-shipment instructions</div>
+          <div class="assumption-item-src">Biggest integration bet — Yair will flag this</div>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">Weather API reliable enough for proactive prevention</div>
+          <div class="assumption-item-src">Proactive lever depends on forecast quality</div>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">Decision-tier thresholds configurable per customer</div>
+          <div class="assumption-item-src">Stated §3.4 — what auto for one may need sign-off for another</div>
+        </div>
+        <div class="assumption-item">
+          <div class="assumption-item-key">2–8°C chilled is the binding spec</div>
+          <div class="assumption-item-src">Ambient lanes carry lower risk — modelled separately</div>
+        </div>
+      </div>
+
+      <div class="assumptions-col">
+        <div class="assumptions-col-label">
+          Deliberately set aside
+          <span class="assumptions-col-sub">Conscious calls · not oversights</span>
+        </div>
+        <div class="assumption-item dim">
+          <div class="assumption-item-key">Daniel's #1 priority was COP, not loss prevention</div>
+          <div class="assumption-item-src">We chose loss prevention as headline — positioning decision</div>
+        </div>
+        <div class="assumption-item dim">
+          <div class="assumption-item-key">Lane Optimization $ value</div>
+          <div class="assumption-item-src">Prior calc superseded — shown illustratively only on §2b</div>
+        </div>
+        <div class="assumption-item dim">
+          <div class="assumption-item-key">High-Value Pareto (top 20% pkgs, ~$2K each)</div>
+          <div class="assumption-item-src">Real problem · out of scope this build · different intervention type</div>
+        </div>
+        <div class="assumption-item dim">
+          <div class="assumption-item-key">Compliance automation</div>
+          <div class="assumption-item-src">Out of scope · audit trail is a byproduct of what we're building</div>
+        </div>
+        <div class="assumption-item dim">
+          <div class="assumption-item-key">"98% is bought" assumes over-provisioning is the mechanism</div>
+          <div class="assumption-item-src">Daniel's inference · not directly measured</div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /appendix-a -->
+
+  <!-- Panel B: Success Metrics -->
+  <div class="appendix-panel" id="appendix-b"
+       data-notes="Pull this up if asked 'how do you know it's working.' The North Star captures both the outcome (in-spec delivery) and the thesis (autonomy earns its place). The guardrail is critical — OOR rate must not rise as autonomy expands. Block (a) maps metrics to each of the four jobs. Block (b) is the platform story for Aviv — coverage and cross-customer learning are the ones to land. Block (c) is per-agent. Block (d) is the tool-layer test of whether the platform thesis holds.">
+
+    <div class="slide-label">Appendix B — Success Metrics</div>
+    <h1 class="slide-heading" style="font-size:23px;margin-bottom:12px">How we know it's working.</h1>
+
+    <div class="sm-header">
+      <div class="sm-north-star">
+        <div class="sm-ns-label">North Star</div>
+        <div class="sm-ns-text">% of monitored shipments delivered in-spec, autonomously</div>
+      </div>
+      <div class="sm-guardrail">
+        <div class="sm-guardrail-label">Guardrail</div>
+        <div class="sm-guardrail-text">Out-of-range rate must not rise as autonomy expands. Autonomy only grows if outcomes hold.</div>
+      </div>
+    </div>
+
+    <div class="sm-grid">
+
+      <div class="sm-block">
+        <div class="sm-block-label">(a) Problems we're solving</div>
+        <div class="sm-agent-label">Detect</div>
+        <div class="sm-metric-row">Detection recall (catch rate)</div>
+        <div class="sm-metric-row">False-positive / alert rate</div>
+        <div class="sm-metric-row">Time-to-detection: minutes vs. days-via-complaint</div>
+        <div class="sm-agent-label">Prevent</div>
+        <div class="sm-metric-row">Preventable-failure capture rate</div>
+        <div class="sm-metric-row">Failure rate: intervened vs. matched-control shipments</div>
+        <div class="sm-metric-row">$ loss prevented (on covered shipments)</div>
+        <div class="sm-agent-label">Attribute + Remediate</div>
+        <div class="sm-metric-row">Attribution accuracy</div>
+        <div class="sm-metric-row">Repeat-failure rate on a lane post-fix</div>
+        <div class="sm-metric-row">MTTR — time from detection to resolution</div>
+        <div class="sm-agent-label">Optimise</div>
+        <div class="sm-metric-row">COP/shipment ↓ over 30+ days</div>
+        <div class="sm-metric-row">$ saved with zero OOR regression</div>
+        <div class="sm-metric-row">% lanes moved to right-provisioned config</div>
+      </div>
+
+      <div class="sm-block">
+        <div class="sm-block-label">(b) Platform</div>
+        <div class="sm-agent-label">Coverage</div>
+        <div class="sm-metric-row">% shipments monitored (5% → growth)</div>
+        <div class="sm-metric-row">Lanes and products under active management</div>
+        <div class="sm-agent-label">Land-and-expand</div>
+        <div class="sm-metric-row">Agents / use-cases live per customer</div>
+        <div class="sm-metric-row"># customers on the Sensos network</div>
+        <div class="sm-agent-label">Cross-customer learning (the moat)</div>
+        <div class="sm-metric-row">Rules promoted network-wide from customer data</div>
+        <div class="sm-metric-row">Lift from cross-entity recommendations vs. solo baseline</div>
+        <div class="sm-agent-label">Onboarding (platform thesis test)</div>
+        <div class="sm-metric-row">Time-to-add new customer / lane: config, not code</div>
+        <div class="sm-metric-row">Telemetry data completeness at onboarding</div>
+      </div>
+
+      <div class="sm-block">
+        <div class="sm-block-label">(c) Agents</div>
+        <div class="sm-agent-label" style="color:var(--si)">SI — Shipment Intelligence</div>
+        <div class="sm-metric-row">Recall; lead time before threshold crossing; false-positive rate</div>
+        <div class="sm-agent-label" style="color:var(--ra)">RA — Resolution</div>
+        <div class="sm-metric-row">Attribution accuracy; % auto-resolved; human-reversal rate</div>
+        <div class="sm-agent-label" style="color:var(--pa)">PA — Prevention</div>
+        <div class="sm-metric-row">Preventable-failure capture; over-trigger rate; outreach response rate</div>
+        <div class="sm-agent-label" style="color:var(--oa)">OA — Optimization</div>
+        <div class="sm-metric-row">$ saved; acceptance rate; regression rate (must stay ~0)</div>
+        <div class="sm-agent-label">Cross-cutting</div>
+        <div class="sm-metric-row">% auto-executed vs. escalated</div>
+        <div class="sm-metric-row">Tier-graduation rate (trust earned over time)</div>
+        <div class="sm-metric-row">Ops-lead manual touches per day ↓</div>
+      </div>
+
+      <div class="sm-block">
+        <div class="sm-block-label">(d) Agent tools</div>
+        <div class="sm-agent-label">Reliability</div>
+        <div class="sm-metric-row">Tool error rate and latency per tool</div>
+        <div class="sm-metric-row">Carrier-dispatch success rate (the integration bet)</div>
+        <div class="sm-metric-row">Telemetry stream uptime / data completeness</div>
+        <div class="sm-agent-label">Accuracy</div>
+        <div class="sm-metric-row">Threshold-evaluator FP/FN rate</div>
+        <div class="sm-metric-row">Confidence-scorer calibration: does 80% confidence = 80% right?</div>
+        <div class="sm-metric-row">Cost-calculator: projected vs. actual savings</div>
+        <div class="sm-agent-label">Reuse (platform thesis)</div>
+        <div class="sm-metric-row">Agents served per tool (avg)</div>
+        <div class="sm-metric-row">New use-cases added with zero new tools built</div>
+      </div>
+
+    </div>
+  </div><!-- /appendix-b -->
+
+  <!-- Panel C: Future Scope -->
+  <div class="appendix-panel" id="appendix-c"
+       data-notes="Use this if asked 'what did you leave out' or 'what would you do next.' These are deliberate scope calls, not gaps. The competitive landscape card matters for Aviv — the 'own all three layers' framing needs stress-testing before it becomes a sales claim. The cold-start / direct-lane-management card closes the trust question the main deck doesn't explicitly answer: how does an ops lead get from 'I approve everything' to 'the agent runs this lane.' That graduation model is the real product roadmap question.">
+
+    <div class="slide-label">Appendix C — Deliberately Out of Scope</div>
+    <h1 class="slide-heading" style="font-size:23px;margin-bottom:16px">What I'd dig into next.</h1>
+
+    <div class="future-grid">
+
+      <div class="future-card">
+        <div class="future-card-num">01 — Competitive landscape</div>
+        <div class="future-card-title">Who else is in this space</div>
+        <div class="future-card-why">Tive, Controlant, Sensitech/Berlinger, Roambee for telemetry. project44/FourKites for visibility. The question is whether any competitor owns all three layers: hardware telemetry, autonomous action, and a cross-customer learning network. Sensos' defensible edge lives in that combination.</div>
+        <div class="future-card-action">Do a real teardown. Map where each player sits across the stack. Stress-test the "no competitor does all three" claim before Aviv takes it into a sales conversation.</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-card-num">02 — Customer's actual tool stack</div>
+        <div class="future-card-title">What the ops team already uses</div>
+        <div class="future-card-why">§4.2 makes a strong claim: "lives in your tools, no new inbox." But we assumed ERP/WMS + Slack + Monday/ServiceNow + Zendesk. If the real stack is different, the integration priority list changes and the design intent needs revisiting before any build starts.</div>
+        <div class="future-card-action">Discovery call with the ops team specifically on tooling. Map which channels actually get attention and which are dead. Design the "lives in your tools" layer around what's used, not what's commonly used.</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-card-num">03 — Adjacent customer types</div>
+        <div class="future-card-title">Who else has the same need</div>
+        <div class="future-card-why">Clinical trials, biologics, vaccines, fresh food/seafood, high-value electronics, specialty chemicals — same telemetry + autonomy pattern, different temp specs and regulatory regimes. Tests the "new customer = new config, not new tools" claim directly.</div>
+        <div class="future-card-action">Map 3–5 adjacent verticals. For each: what's the temp spec, regulatory context, which tools already apply, what's missing. Shapes the land-and-expand story for Aviv.</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-card-num">04 — Path to direct lane management</div>
+        <div class="future-card-title">When agents stop proposing and start deciding</div>
+        <div class="future-card-why">The demo shows propose→approve. The endgame is agents running lanes directly within guardrails. Hard questions: shadow mode duration, graduation criteria, which decisions graduate first, what evidence an ops lead needs to cede control, pharma regulatory constraints on autonomous actions.</div>
+        <div class="future-card-action">Design the trust graduation model explicitly — cold-start in propose-only, measurable gates per tier. Closes the one question experienced ops leads always ask that the deck doesn't answer.</div>
+      </div>
+
+    </div>
+  </div><!-- /appendix-c -->
+
+</div><!-- /#appendix-overlay -->
+
 <!-- ══ SPEAKER NOTES (hidden) ════════════════════════════ -->
 <section class="deck-section" id="slide-speaker" style="display:none">
 </section>
@@ -987,6 +1244,8 @@
   <span id="slide-counter">1 / 17</span>
   <button class="nav-btn" id="btn-next">Next →</button>
 </nav>
+
+<div id="appendix-hint">A — appendix</div>
 
 <!-- ── Speaker panel ────────────────────────────────────── -->
 <div id="speaker-panel"></div>

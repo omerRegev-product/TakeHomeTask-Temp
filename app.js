@@ -54,6 +54,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
   if (e.key === 'ArrowLeft')                    { e.preventDefault(); prev(); }
   if (e.key === 's' || e.key === 'S')           { toggleSpeaker(); }
+  if (e.key === 'a' || e.key === 'A')           { toggleAppendix(); }
 });
 
 // ── Navigation UI ─────────────────────────────────────────
@@ -456,6 +457,55 @@ function triggerRecapChecks() {
 }
 
 // ══════════════════════════════════════════════════════════
+// APPENDIX — overlay open / close / tab switching
+// ══════════════════════════════════════════════════════════
+let appendixOpen = false;
+
+function toggleAppendix() {
+  appendixOpen = !appendixOpen;
+  const overlay = document.getElementById('appendix-overlay');
+  overlay.classList.toggle('open', appendixOpen);
+  if (appendixOpen) updateAppendixNotes();
+  else if (speakerOpen) updateSpeakerNotes();
+}
+
+function initAppendix() {
+  const closeBtn = document.getElementById('appendix-close');
+  const tabs     = document.querySelectorAll('.appendix-tab');
+
+  closeBtn.addEventListener('click', () => {
+    appendixOpen = false;
+    document.getElementById('appendix-overlay').classList.remove('open');
+    if (speakerOpen) updateSpeakerNotes();
+  });
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.appendix-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.panel).classList.add('active');
+      if (speakerOpen) updateAppendixNotes();
+    });
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && appendixOpen) {
+      appendixOpen = false;
+      document.getElementById('appendix-overlay').classList.remove('open');
+      if (speakerOpen) updateSpeakerNotes();
+    }
+  });
+}
+
+function updateAppendixNotes() {
+  const activePanel = document.querySelector('.appendix-panel.active');
+  if (activePanel && speakerOpen) {
+    speakerPanel.textContent = activePanel.dataset.notes || '(no notes for this panel)';
+  }
+}
+
+// ══════════════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
@@ -472,4 +522,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initPlatform();
   initArchitecture();
   initLogLevels();
+  initAppendix();
 });

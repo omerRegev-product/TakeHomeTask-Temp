@@ -1715,3 +1715,305 @@ a { text-decoration: none; color: inherit; }
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 10px; }
+
+/* ══════════════════════════════════════════════════════════
+   APPENDIX (overlay + trigger)
+══════════════════════════════════════════════════════════ */
+
+/* Evals slide pointer to appendix */
+.eval-appendix-note {
+  padding: 10px 0 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted-2);
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--line-light);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+/* Appendix hint (mirrors #speaker-hint) */
+#appendix-hint {
+  position: fixed;
+  top: 28px;
+  right: 48px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #444448;
+  z-index: 101;
+  letter-spacing: 0.06em;
+}
+
+/* Overlay — inside #deck-stage so it inherits zoom */
+#appendix-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: none;
+  flex-direction: column;
+  background: var(--paper);
+}
+#appendix-overlay.open { display: flex; }
+
+.appendix-chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--pad-h);
+  height: 48px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.appendix-tabs { display: flex; gap: 4px; }
+
+.appendix-tab {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted-2);
+  padding: 5px 14px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  background: none;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.appendix-tab:hover { color: var(--muted); }
+.appendix-tab.active {
+  color: var(--ink);
+  border-color: var(--line);
+  background: var(--paper);
+}
+
+#appendix-close {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  padding: 5px 14px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  cursor: pointer;
+  background: none;
+  transition: color 0.15s;
+}
+#appendix-close:hover { color: var(--ink); border-color: var(--muted-2); }
+
+.appendix-panel {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  padding: var(--pad-v) var(--pad-h);
+  min-height: 0;
+  overflow: hidden;
+}
+.appendix-panel.active { display: flex; }
+
+/* ── Slide A: Assumptions 3-col ─────────────────────────── */
+.assumptions-3col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+}
+.assumptions-col {
+  padding: 12px 14px;
+  border-right: 1px solid var(--line);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.assumptions-col:last-child { border-right: none; }
+.assumptions-col-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+  line-height: 1.5;
+}
+.assumptions-col-sub {
+  font-size: 9px;
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.7;
+  display: block;
+  margin-top: 2px;
+}
+.assumption-item {
+  padding: 5px 0;
+  border-bottom: 1px solid var(--line-light);
+}
+.assumption-item:last-child { border-bottom: none; }
+.assumption-item-key {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  line-height: 1.4;
+  margin-bottom: 1px;
+}
+.assumption-item-src {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--muted-2);
+  line-height: 1.3;
+}
+.assumption-item.warn .assumption-item-key { color: var(--warn); }
+.assumption-item.dim .assumption-item-key  { color: var(--muted); }
+.assumption-item.dim .assumption-item-src  { opacity: 0.7; }
+
+/* ── Slide B: Success Metrics ────────────────────────────── */
+.sm-header {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  flex-shrink: 0;
+  margin-bottom: 10px;
+}
+.sm-north-star {
+  flex: 1;
+  padding: 10px 14px;
+  background: var(--ok-bg);
+  border: 1px solid rgba(44,122,86,0.3);
+  border-radius: 5px;
+}
+.sm-ns-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ok);
+  margin-bottom: 4px;
+}
+.sm-ns-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.sm-guardrail {
+  padding: 10px 14px;
+  background: var(--warn-bg);
+  border: 1px solid rgba(181,117,26,0.3);
+  border-radius: 5px;
+  max-width: 290px;
+  flex-shrink: 0;
+}
+.sm-guardrail-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--warn);
+  margin-bottom: 4px;
+}
+.sm-guardrail-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+.sm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+}
+.sm-block {
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--surface);
+  padding: 10px 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.sm-block-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.sm-agent-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 6px 0 2px;
+}
+.sm-agent-label:first-child { margin-top: 0; }
+.sm-metric-row {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--muted-2);
+  line-height: 1.5;
+  padding-left: 10px;
+  position: relative;
+}
+.sm-metric-row::before {
+  content: '·';
+  position: absolute;
+  left: 2px;
+}
+
+/* ── Slide C: Future Scope ───────────────────────────────── */
+.future-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+.future-card {
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+}
+.future-card-num {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  margin-bottom: 8px;
+}
+.future-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.future-card-why {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.55;
+  flex: 1;
+}
+.future-card-action {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--muted-2);
+  line-height: 1.5;
+  border-top: 1px solid var(--line-light);
+  padding-top: 10px;
+  margin-top: 10px;
+}
