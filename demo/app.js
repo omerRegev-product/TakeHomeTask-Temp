@@ -943,6 +943,7 @@ function renderActivityFeed(lane) {
   html += `<div class="feed-section-label">Activity</div>`;
 
   const filtered = ACTIVITY.filter(item => {
+    if (item.laneId && item.laneId !== lane.id) return false;
     if (state.activityFilter === 'agents') return item.agentId !== 'YOU';
     if (state.activityFilter === 'humans') return item.agentId === 'YOU';
     return true;
@@ -1026,6 +1027,10 @@ function renderActivityRow(item) {
     ? `<div class="activity-approved-by">✓ Approved by ${item.approvedBy} · ${item.approvedAt}</div>`
     : '';
 
+  const channelHtml = item.channel
+    ? `<div class="activity-channel"><span class="ch-dot"></span>via ${item.channel}</div>`
+    : '';
+
   return `
     <div class="activity-row" id="row-${item.id}">
       <div class="activity-row-main">
@@ -1034,6 +1039,7 @@ function renderActivityRow(item) {
           <div class="activity-agent-name">${agentName(item.agentId)}</div>
           <div class="activity-summary">${item.summary}</div>
           ${approvedHtml}
+          ${channelHtml}
         </div>
         <div class="activity-right">${rightHtml}</div>
       </div>
@@ -1743,7 +1749,7 @@ function renderShipmentDetail(id) {
       <div class="update-row">
         <div class="update-time">${e.time}</div>
         <div class="agent-chip" style="background:${agentColor(e.agentId)}">${e.agentId}</div>
-        <div class="update-text">${e.text}</div>
+        <div class="update-text">${e.text}${(e.channel && e.agentId === 'YOU') ? `<span class="update-channel">· ${e.channel}</span>` : ''}</div>
       </div>`).join('');
   }
 }

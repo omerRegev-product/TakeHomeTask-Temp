@@ -188,6 +188,7 @@ const ACTIVITY = [
   {
     id: 'act-1',
     agentId: 'RA',
+    laneId: 'miami-nyc',
     summary: 'Updated ice config to 2 boxes for next 5 shipments. Triggered by warm readings at Middle Mile.',
     time: 'Today 14:32',
     statusLabel: 'Resolved',
@@ -235,6 +236,7 @@ const ACTIVITY = [
   {
     id: 'act-2',
     agentId: 'PA',
+    laneId: 'miami-nyc',
     summary: 'Heat advisory on Miami route Tue–Wed. Bumped 3 at-risk shipments to overnight. FedEx instruction dispatched.',
     time: 'Today 09:15',
     statusLabel: 'Done',
@@ -244,10 +246,12 @@ const ACTIVITY = [
   {
     id: 'act-3',
     agentId: 'YOU',
+    laneId: 'miami-nyc',
     summary: 'Approved: reduce ice to 1 box on overnight shipments Nov–Feb. (Optimization Agent recommendation)',
     time: 'Yesterday 17:43',
     statusLabel: 'Approved',
     statusType: 'approved',
+    channel: 'Slack',
     hasDrilldown: false,
     approvedBy: 'Ops Lead',
     approvedAt: 'Yesterday 17:43',
@@ -294,10 +298,94 @@ const ACTIVITY = [
   {
     id: 'act-5',
     agentId: 'SI',
+    laneId: 'miami-nyc',
     summary: 'Daily scan complete. 11 shipments in range, 3 flagged at-risk, routed to Resolution Agent.',
     time: 'Yesterday 08:00',
     statusLabel: 'Routed',
     statusType: 'routed',
+    hasDrilldown: false,
+  },
+  // Miami–NYC: human asked a question via Slack
+  {
+    id: 'act-6',
+    agentId: 'YOU',
+    laneId: 'miami-nyc',
+    summary: 'Asked via Slack: are Miami failures heat-related or carrier? SI confirmed seasonal ice mismatch — not carrier.',
+    time: 'Yesterday 14:55',
+    statusLabel: 'Resolved',
+    statusType: 'resolved',
+    channel: 'Slack',
+    hasDrilldown: false,
+  },
+  // London–Berlin: human approved a config change via Slack
+  {
+    id: 'act-7',
+    agentId: 'YOU',
+    laneId: 'london-berlin',
+    summary: 'Confirmed via Slack: extend 2-box config through Q4. OA updated lane recommendation.',
+    time: 'Today 10:45',
+    statusLabel: 'Approved',
+    statusType: 'approved',
+    channel: 'Slack',
+    hasDrilldown: false,
+    approvedBy: 'Ops Lead',
+    approvedAt: 'Today 10:45',
+  },
+  // London–Berlin: agent SI follow-up
+  {
+    id: 'act-8',
+    agentId: 'SI',
+    laneId: 'london-berlin',
+    summary: 'Q4 config confirmed. Shipping matrix updated. Next review scheduled in 30 days.',
+    time: 'Today 10:46',
+    statusLabel: 'Done',
+    statusType: 'done',
+    hasDrilldown: false,
+  },
+  // NYC–Boston: human raised an issue via Jira
+  {
+    id: 'act-9',
+    agentId: 'YOU',
+    laneId: 'nyc-boston',
+    summary: 'Raised in Jira: overnight dispatch SLA slipping on cold-chain runs. PA assigned to review Tuesday schedule.',
+    time: 'Yesterday 09:30',
+    statusLabel: 'Routed',
+    statusType: 'routed',
+    channel: 'Jira',
+    hasDrilldown: false,
+  },
+  // NYC–Boston: PA picked it up
+  {
+    id: 'act-10',
+    agentId: 'PA',
+    laneId: 'nyc-boston',
+    summary: 'Reviewed Jira flag. Tuesday schedule adjusted — 4 shipments moved to earlier dispatch window.',
+    time: 'Yesterday 10:02',
+    statusLabel: 'Done',
+    statusType: 'done',
+    hasDrilldown: false,
+  },
+  // Singapore–Sydney: human flagged a carrier gap via Jira
+  {
+    id: 'act-11',
+    agentId: 'YOU',
+    laneId: 'singapore-syd',
+    summary: 'Flagged in Jira: Changi Logistics scan gap on 2 shipments. SI asked to investigate and confirm in-range.',
+    time: 'Yesterday 11:00',
+    statusLabel: 'Routed',
+    statusType: 'routed',
+    channel: 'Jira',
+    hasDrilldown: false,
+  },
+  // Singapore–Sydney: SI resolved it
+  {
+    id: 'act-12',
+    agentId: 'SI',
+    laneId: 'singapore-syd',
+    summary: 'Changi scan gap confirmed non-critical — telemetry intact, carrier delay only. Both shipments in range.',
+    time: 'Yesterday 11:18',
+    statusLabel: 'Resolved',
+    statusType: 'resolved',
     hasDrilldown: false,
   },
 ];
@@ -413,6 +501,7 @@ const SHIPMENTS = [
     status: 'live', stageId: 'middle-mile', stage: 'Middle Mile',
     temp: '6.8°C', tempStatus: 'warn', eta: '3h',
     events: [
+      { time: '14:45', agentId: 'YOU', text: 'Config change confirmed', channel: 'Slack' },
       { time: '14:32', agentId: 'RA', text: 'Ice config updated to 2 boxes · applied to next 5 shipments' },
       { time: '14:08', agentId: 'SI', text: 'Temp 6.8°C at Middle Mile · flagged and routed to RA' },
       { time: '11:04', agentId: 'SI', text: 'Departed Regional DC · sensors nominal' },
@@ -459,6 +548,7 @@ const SHIPMENTS = [
     status: 'live', stageId: 'last-mile', stage: 'Last Mile',
     temp: '5.9°C', tempStatus: 'ok', eta: '1.5h',
     events: [
+      { time: '09:22', agentId: 'YOU', text: 'Overnight bump acknowledged', channel: 'Slack' },
       { time: '09:15', agentId: 'PA', text: 'Bumped to overnight dispatch · heat advisory Tue-Wed' },
       { time: '07:00', agentId: 'SI', text: 'Departed JFK Depot · sensors nominal' },
     ],
@@ -518,6 +608,7 @@ const SHIPMENTS = [
     deliveredAt: 'Yesterday 14:05', outcome: 'Out of range (resolved)',
     events: [
       { time: 'Yesterday 14:05', agentId: 'SI', text: 'Delivered · out-of-range flag cleared by Resolution Agent' },
+      { time: 'Yesterday 12:10', agentId: 'YOU', text: 'Override approved — proceed with config correction', channel: 'Slack' },
       { time: 'Yesterday 11:30', agentId: 'RA', text: 'Temp excursion resolved · config corrected for subsequent shipments' },
       { time: 'Yesterday 09:00', agentId: 'SI', text: 'Flagged at Middle Mile · 7.1°C · routed to RA' },
     ],

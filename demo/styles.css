@@ -1665,6 +1665,34 @@ a { text-decoration: none; color: inherit; }
   margin-top: 3px;
 }
 
+.activity-channel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted-2);
+  letter-spacing: 0.03em;
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.activity-channel .ch-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--muted-2);
+  flex-shrink: 0;
+}
+
+.update-channel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--muted-2);
+  letter-spacing: 0.04em;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
 /* ============================================================
    ITEM 6 — Activity filter bar
    ============================================================ */
@@ -2352,7 +2380,7 @@ a { text-decoration: none; color: inherit; }
 /* Map controls overlay */
 #map-controls {
   position: absolute;
-  bottom: 36px;
+  top: 16px;
   left: 16px;
   background: var(--surface);
   border: 1px solid var(--line);
