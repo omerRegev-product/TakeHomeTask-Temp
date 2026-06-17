@@ -99,14 +99,15 @@ const speakerNotes = {
   6:  'The vision in one line, then the two states. Make the arrow feel significant. The CEO quote closes it — let it land. Don\'t say anything after you read it.',
   7:  'Infrastructure, not a bespoke agent. The grid shows what\'s reusable. The agent mapping below shows what this client gets. New customer = new agent config, not new tools.',
   8:  'Click each agent node for the spec card. SI first — it routes everything else. Key point: invocation authority is separate from approval authority. Any user can trigger; Decision Tier governs output.',
-  9:  'Three tiers. Not just "escalate" — a policy, and a configurable one. The configurable note at the bottom matters: what\'s auto for one customer might require sign-off for another.',
-  10: 'Click the log levels live. Start at L1 (outcome), expand to L2 (tasks), expand to L3 (trace). Principle: outcome by default, everything expandable on demand.',
-  11: 'Four loops. Cross-entity is the moat — say it clearly. No individual customer accumulates this breadth of signal. Sensos does.',
-  12: 'Set the frame first: the game metaphor. Then walk the three entities. Lanes are where decisions live. Agents and humans are both participants — neither is just watching. Note that this is a simplified view.',
-  13: 'Four design principles. Acts, surfaces, lets the user drive — and lives in the tools they already use. The last one matters: no new inbox. Agents reach into Slack, Monday, ServiceNow. The ops team doesn\'t change how they work.',
-  14: 'Before you open the demo: set expectations. Wireframe, not everything wired. The point is the vision of how the ops team experiences this — not a production build. Then open it and walk: quiet state → active state → Miami-NYC lane → expand L2 → L3 → approve.',
-  15: 'Tick the four questions. Then the expansion path. End on: approved decisions become rules, rules enable autonomy, autonomy expands as trust is earned.',
-  16: 'Thank you. Open for questions. You have the content — stay in the detail wherever they push.'
+  9:  'Framework overview. Name all three before diving in. Permissions: who decides what. Transparency: what the human sees. Evaluation: how agents earn more autonomy over time. The thread is deliberate: autonomy only works if control is built in at every layer.',
+  10: 'Three tiers. Not just "escalate" — a policy, and a configurable one. The configurable note at the bottom matters: what\'s auto for one customer might require sign-off for another.',
+  11: 'Click the log levels live. Start at L1 (outcome), expand to L2 (tasks), expand to L3 (trace). Principle: outcome by default, everything expandable on demand.',
+  12: 'Four loops. Cross-entity is the moat — say it clearly. No individual customer accumulates this breadth of signal. Sensos does.',
+  13: 'Set the frame first: the game metaphor. Then walk the three entities. Lanes are where decisions live. Agents and humans are both participants — neither is just watching. Note that this is a simplified view.',
+  14: 'Four design principles. Acts, surfaces, lets the user drive — and lives in the tools they already use. The last one matters: no new inbox. Agents reach into Slack, Monday, ServiceNow. The ops team doesn\'t change how they work.',
+  15: 'Before you open the demo: set expectations. Wireframe, not everything wired. The point is the vision of how the ops team experiences this — not a production build. Then open it and walk: quiet state → active state → Miami-NYC lane → expand L2 → L3 → approve.',
+  16: 'Tick the four questions. Then the expansion path. End on: approved decisions become rules, rules enable autonomy, autonomy expands as trust is earned.',
+  17: 'Thank you. Open for questions. You have the content — stay in the detail wherever they push.'
 };
 
 function toggleSpeaker() {

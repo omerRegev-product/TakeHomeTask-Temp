@@ -593,9 +593,42 @@
   </div>
 </section>
 
-<!-- ══ §3.4 HUMAN IN LOOP ══════════════════════════════ -->
-<section class="deck-section" id="slide-humanloop">
+<!-- ══ §3.4 HUMAN-IN-THE-LOOP (framework) ══════════════ -->
+<section class="deck-section" id="slide-hitl-framework">
   <div class="slide-label anim">§3.4 — Human-in-the-Loop</div>
+  <h1 class="slide-heading anim">Autonomy is earned. Three things keep the human in control.</h1>
+
+  <div class="hitl-framework anim">
+    <div class="hitl-row">
+      <div class="hitl-num">01</div>
+      <div class="hitl-content">
+        <div class="hitl-name">Permissions</div>
+        <div class="hitl-desc">Who decides what, and at what stakes. Every agent action has a tier: auto-execute, team review, or ops-lead sign-off.</div>
+      </div>
+      <div class="hitl-ref">Permissions →</div>
+    </div>
+    <div class="hitl-row">
+      <div class="hitl-num">02</div>
+      <div class="hitl-content">
+        <div class="hitl-name">Transparency</div>
+        <div class="hitl-desc">Every action is logged, expandable, and auditable. Outcome by default. Full reasoning trace on demand.</div>
+      </div>
+      <div class="hitl-ref">Transparency →</div>
+    </div>
+    <div class="hitl-row">
+      <div class="hitl-num">03</div>
+      <div class="hitl-content">
+        <div class="hitl-name">Evaluation</div>
+        <div class="hitl-desc">Agents measure their own outcomes. Autonomy expands only when results justify it. Trust is earned, not assumed.</div>
+      </div>
+      <div class="hitl-ref">Evaluation →</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ §3.4 PERMISSIONS ══════════════════════════════════ -->
+<section class="deck-section" id="slide-humanloop">
+  <div class="slide-label anim">§3.4 — Permissions</div>
   <h1 class="slide-heading anim">How the human stays in control.</h1>
 
   <div class="human-loop-layout">
@@ -633,17 +666,21 @@
     <div class="loop-config-note anim">
       <strong>Thresholds are configurable per customer.</strong> What counts as a "Small" auto-execute decision for one customer may be a "Large" (ops-lead approval) for another. Emailing a warehouse might auto-execute for a high-trust customer and require sign-off for a new one. The tier model is a policy — each customer tunes it.
     </div>
+
+    <div class="loop-guardrail-note anim">
+      <strong>Guardrails sit above this.</strong> The tier model governs who approves what. A separate guardrail layer defines what agents are never allowed to do — hard limits that block actions before they reach any queue, regardless of tier or confidence. Examples: no lane changes beyond a weekly cap, no patient contact below ops-lead tier, no write actions above a cost threshold. Permission tiers are one part of the broader agent safety model.
+    </div>
   </div>
 </section>
 
 <!-- ══ §3.5 SHOW / HIDE ═══════════════════════════════════ -->
 <section class="deck-section" id="slide-showhide">
-  <div class="slide-label anim">§3.5 — What We Show the User</div>
-  <h1 class="slide-heading anim">Final outputs and human interactions only. Everything else is expandable.</h1>
+  <div class="slide-label anim">§3.5 — Transparency: What We Show the User</div>
+  <h1 class="slide-heading anim">Every action is logged. Nothing is a black box.</h1>
 
   <div class="showhide-layout anim">
     <div class="showhide-principle">
-      <strong>Principle:</strong> show what happened and what was done. Not every step, not every tool call. The ops lead reviews the outcome — not the methodology. The detail is always available; it's just not in their face.
+      We show the outcome, not the methodology. Full reasoning is always one click away.
     </div>
 
     <!-- Level 1 -->
@@ -714,7 +751,7 @@
 
 <!-- ══ §3.6 EVALS ══════════════════════════════════════════ -->
 <section class="deck-section" id="slide-evals">
-  <div class="slide-label anim">§3.6 — Evals &amp; Learning</div>
+  <div class="slide-label anim">§3.6 — Evaluation: Evals &amp; Learning</div>
   <h1 class="slide-heading anim">Four feedback loops. How agents get better.</h1>
 
   <div class="evals-layout">
