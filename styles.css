@@ -222,6 +222,13 @@ a { text-decoration: none; color: inherit; }
   opacity: 0.55;
 }
 
+.deck-logo-img {
+  height: 38px;
+  width: auto;
+  margin-bottom: 28px;
+  opacity: 0.82;
+}
+
 .title-wordmark {
   font-size: 13px;
   font-weight: 700;
