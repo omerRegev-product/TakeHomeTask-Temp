@@ -1916,6 +1916,23 @@ function showToast(msg) {
 }
 
 /* ─────────────────────────────────────────────────────────
+   OVERVIEW COMMAND BAR
+───────────────────────────────────────────────────────── */
+function submitOverviewCommand() {
+  const input = document.getElementById('overview-command-input');
+  if (!input || !input.value.trim()) return;
+  const text = input.value.trim();
+  input.value = '';
+  showPopup({
+    agentId: 'SI',
+    type: 'info',
+    title: 'On it',
+    body: `Shipment Intelligence is reviewing the fleet: "${text}"`,
+    lane: 'miami-nyc',
+  });
+}
+
+/* ─────────────────────────────────────────────────────────
    LANE COMMAND BAR
 ───────────────────────────────────────────────────────── */
 function submitLaneCommand() {
@@ -2007,6 +2024,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const restartBtn = document.getElementById('demo-restart-btn');
   if (restartBtn) restartBtn.addEventListener('click', restartDemo);
+
+  // Overview command bar
+  const overviewInput = document.getElementById('overview-command-input');
+  if (overviewInput) {
+    overviewInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') submitOverviewCommand();
+    });
+  }
+  const overviewSend = document.getElementById('overview-command-send');
+  if (overviewSend) overviewSend.addEventListener('click', submitOverviewCommand);
 
   // Lane command bar
   const cmdInput = document.getElementById('lane-command-input');

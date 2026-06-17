@@ -48,6 +48,22 @@
 <div id="screen-main" class="screen">
   <div class="layout">
     <aside class="sidebar" data-sidebar="overview"></aside>
+
+    <!-- Floating agent command bar -->
+    <div class="lane-command-bar" id="overview-command-bar">
+      <div class="lane-command-agents-label">
+        <span class="lcb-dot"></span>4 agents active
+      </div>
+      <input class="lane-command-input" id="overview-command-input"
+             type="text" autocomplete="off" spellcheck="false"
+             placeholder="Ask the agents anything across the fleet...">
+      <button class="lane-command-send" id="overview-command-send" aria-label="Send">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
     <div class="main">
       <div class="briefing-bar" id="main-briefing"></div>
       <div class="overview-split">
